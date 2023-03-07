@@ -1,11 +1,33 @@
-# Tarea de la clase 2
+# Proyecto de mascotas
+``descripción:`` proyecto realizado en simultaneo al curso para ir aplicando todo lo visto y aprendido. 
 
-## Clase, Modulos y Controladores
+## Pauta final brindada por el mentor ``Agustin fiordelisi`` - ``Introducción a NestJS``
+Trabajo Practico: 
+ 1. Generar una aplicación con al menos 4 Módulos con sus controladores y sus respectivas rutas, verbos HTTP y PipeValidators 
+ 2. Generar 4 DTOs referidos a cada módulo con algunos ClassValidators. 
+ 3. Generar 4 servicios (No necesariamente con funciones) y que estén correctamente importados en cada modulo. 
+ 4. Generar una conexión a alguna base de Datos (mysql o postgre) Con ``TypeORM``.
+ 5. generar 4 entidades con sus respectivas relaciones: "one to one, many to many, many to one".
+  Agregar la funcionalidad de ``Crear``, ``Obtener todos`` (Opcional de obtener uno), ``editar`` y ``eliminar``; 
+  
+  * desde un solo modulo, en mi caso elegi el modulo/entidad CAT para todo esto.
+  
+  ``OPCIONAL``: Incluir un ExceptionFilter
 
+
+## Paso a paso para completar la tarea
 
 ## Crear 4 modulos aparte con un get controlador que responda al endpoint
 
-## Manera efectiva de crearlo:
+TIP importante seguir la guia de nest por posibles cambios.
+
+0. Instalar nest y generar un proyecto
+
+````
+$ npm i -g @nestjs/cli
+
+$ nest new Proyecto-mascotas
+````
 
 1. Crear modulo
 
@@ -21,7 +43,6 @@ nest g co name_module
 
 ## se enlaza directamente a su modulo con el mismo nombre
 solo resta crear los enpoints atraves de los verbos.
-
 
 
 # Tarea clase 3
@@ -45,13 +66,9 @@ REQ : por paquete 4 atributos.
 5. Crear metodos en el servicio que ejecuten cierta logica
 
 
-# Descripcion de la solucion
+## Status de avances durante lo dado en las clases
 
-
-
-# Entregar avances durante lo dado en las clases
-
-## Logrado hasta el momento:
+### Logrado hasta el momento:
  
  - crear modulos
  - crear controladores
@@ -61,17 +78,8 @@ REQ : por paquete 4 atributos.
  - CRUD de un endpoint entero desde cero.
 
 ... 
-- Creacion de repositorio sin poder implementar uso
-- Creacion de entidad sin poder implementar uso
-
-
-- Implementacion de repositorios en dos entidades
-
- Pendientes:
-
-- Implementacion de las entidades
- - Implementacion de repositorio como la ultima capa antes de la persistencia de datos.
-  
+- Implementacion de la capa repositorios en dos entidades
+- Conexión a la base de datos MySQL
 
 
 ## Instalaciones necesarias para la parte del TypeORM
@@ -84,7 +92,14 @@ npm install --save typeorm mysql2
 npm i @nestjs/typeorm
 
 
-## Conexion a la base de datos
-
+## Conexión a la base de datos.
 Crear modulo y para la conexion con la base MySQL
+
+1. Instalar MySQL en la maquina
+2. Instalar Motor de base de datos EJ: ``Workbench``
+3. Definir las entidades con ``TYPEORM``
+4. Chequear autogeneracion en el workbench o en respectivo gestor de base de datos.
+
+
+``Alternativa al gestor de base de datos`` : podriamos interactuar con la base por cli
 

@@ -22,6 +22,7 @@ import {Post} from 'src/posteos/entity/post.entity'
       keepConnectionAlive: true,
       retryAttempts: 2,
       retryDelay: 1000,
+      autoLoadEntities: true,
     }),
     }),
   ],

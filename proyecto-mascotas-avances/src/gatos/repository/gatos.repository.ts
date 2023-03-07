@@ -4,7 +4,7 @@ import { GatoDto } from '../dto/gato.dto';
 
 //Vamos a crear un repositorio para nuestro gato
 @Injectable()
-export class GatoRepository {    
+export class GatoRepository {        
     //Creamos coleccion ficticia de gatos
     gatosCollection: GatoDto[] = [
         {
@@ -12,7 +12,6 @@ export class GatoRepository {
             name: 'Tom'
         }
     ];
-
 
     //Creamos nuevo nuevo:
     //Vamos a recibir un item que cumpla con el dto
@@ -49,5 +48,5 @@ export class GatoRepository {
         this.gatosCollection.splice(gatoIndex, 1)
         return `El gato ha sido eliminado correctamente`
     }
-    
+
 }

@@ -20,8 +20,7 @@ const url_connect = "mongodb+srv://admin_test_1:root@cluster0.feagcuz.mongodb.ne
 
 @Module({
   imports: [DatabaseModule, PerrosModule, GatosModule, UsuariosModule, PosteosModule, PruebasModule, 
-  
-  // conexion a la base de datos
+  // conexion a la base de datos no relacional 
   // MongooseModule.forRoot('mongodb://localhost:27017/DB_PERROS')
   // MongooseModule.forRoot(url_connect), Pruebas2Module
   ],
