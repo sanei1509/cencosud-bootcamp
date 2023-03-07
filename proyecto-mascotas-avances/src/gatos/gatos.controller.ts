@@ -1,5 +1,5 @@
 //importacion de decoradores / verbos a utilizar
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { filter } from 'rxjs';
 import { GatoDto } from './dto/gato.dto';
 import { GatosService } from './gatos.service';
@@ -30,6 +30,15 @@ export class GatosController {
     }
 
     // tarea, crear update y delete
-    
+    @Patch(':id')
+    update(@Param("id", ParseIntPipe) id: number, @Body() gato: GatoDto){
+        return this.servicio.update(id, gato)
+    }
+
+    @Delete(':id')
+    deleteOne(@Param("id", ParseIntPipe) id: number){
+        return this.servicio.deleteOne(id)
+    }
+
 }
 

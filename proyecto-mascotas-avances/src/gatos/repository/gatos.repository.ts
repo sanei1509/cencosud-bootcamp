@@ -33,4 +33,21 @@ export class GatoRepository {
         console.log(gato)
         return gato
     }
+
+    // Actualizamos la informacion de un gato
+    update(id: number, gato: GatoDto) {
+        const gatoIndex = this.gatosCollection.findIndex(gato => gato.id === id)
+        this.gatosCollection[gatoIndex] = gato;
+        return `${gato.name} ha sido actualizado correctamente`
+    }
+
+
+
+    // Eliminamos un gato por determinado ID
+    deleteOne(id: number) {
+        const gatoIndex = this.gatosCollection.findIndex(gato => gato.id === id)
+        this.gatosCollection.splice(gatoIndex, 1)
+        return `El gato ha sido eliminado correctamente`
+    }
+    
 }
