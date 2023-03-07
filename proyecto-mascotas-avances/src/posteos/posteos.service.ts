@@ -3,7 +3,7 @@ import {PostDto} from "./dto/posteo.dto";
 
 @Injectable()
 export class PosteosService {
-         // Creamos los metodos que vamos a utilizar para retornar ciertas cosas en los controladores
+    // Creamos los metodos que vamos a utilizar para retornar ciertas cosas en los controladores
     
     //Creamos coleccion ficticia de gatos
     posteos: PostDto[] = [
