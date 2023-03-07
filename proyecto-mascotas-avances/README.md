@@ -65,6 +65,8 @@ REQ : por paquete 4 atributos.
 - Creacion de entidad sin poder implementar uso
 
 
+- Implementacion de repositorios en dos entidades
+
  Pendientes:
 
 - Implementacion de las entidades
@@ -72,4 +74,17 @@ REQ : por paquete 4 atributos.
   
 
 
+## Instalaciones necesarias para la parte del TypeORM
+
+
+npm install class-transformer --save
+npm install reflect-metadata --save
+npm install mysql --save
+npm install --save typeorm mysql2
+npm i @nestjs/typeorm
+
+
+## Conexion a la base de datos
+
+Crear modulo y para la conexion con la base MySQL
 

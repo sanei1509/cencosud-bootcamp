@@ -14,15 +14,16 @@ import { Pruebas2Module } from './pruebas-2/pruebas-2.module';
 // servicios de prueba
 import { PruebasService } from './pruebas/pruebas.service';
 import { Pruebas2Service } from './pruebas-2/pruebas-2.service';
+import { DatabaseModule } from './database/database.module';
 
 const url_connect = "mongodb+srv://admin_test_1:root@cluster0.feagcuz.mongodb.net/DB_TEST?retryWrites=true&w=majority"
 
 @Module({
-  imports: [PerrosModule, GatosModule, UsuariosModule, PosteosModule, PruebasModule, 
+  imports: [DatabaseModule, PerrosModule, GatosModule, UsuariosModule, PosteosModule, PruebasModule, 
   
   // conexion a la base de datos
   // MongooseModule.forRoot('mongodb://localhost:27017/DB_PERROS')
-  MongooseModule.forRoot(url_connect), Pruebas2Module
+  // MongooseModule.forRoot(url_connect), Pruebas2Module
   ],
   controllers: [AppController],
   providers: [AppService, PruebasService, Pruebas2Service],
