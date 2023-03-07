@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {PostDto} from "./dto/posteo.dto";
+import { Post } from './entity/post.entity';
 
 @Injectable()
 export class PosteosService {
@@ -34,5 +35,23 @@ export class PosteosService {
         const posteo = this.posteos.filter(posteo => posteo.id === id)
         console.log(posteo)
         return posteo
-    }   
+    }
+
+        // Actualizamos la informacion de un gato
+    update(id: number, post: PostDto) {
+        //Buscamos el indice del gato pasado por parametro
+        const postIndex = this.posteos.findIndex(gato => gato.id === id)
+        //Mutamos ese objeto gato con la nueva informacion
+        this.posteos[postIndex] = post;
+        return `el post de ${post.author} ha sido actualizado correctamente`
+    }
+    
+    
+    
+    // Eliminamos un post por determinado ID
+    deleteOne(id: number) {
+        const postIndex = this.posteos.findIndex(post => post.id === id)
+        this.posteos.splice(postIndex, 1)
+        return `El post ha sido eliminado correctamente`
+    }
 }
