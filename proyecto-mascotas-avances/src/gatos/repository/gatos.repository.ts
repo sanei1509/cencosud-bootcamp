@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { filter } from 'rxjs';
-import { GatoDto } from './dto/gato.dto';
+import { GatoDto } from '../dto/gato.dto';
 
 //Vamos a crear un repositorio para nuestro gato
 @Injectable()

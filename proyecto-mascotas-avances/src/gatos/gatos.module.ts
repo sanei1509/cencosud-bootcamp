@@ -1,7 +1,7 @@
 //modulo de perros
 import { Module } from '@nestjs/common';
 import { GatosController } from './gatos.controller';
-import { GatoRepository } from './gatos.repository';
+import { GatoRepository } from './repository/gatos.repository';
 import { GatosService } from './gatos.service';
 
 @Module({
