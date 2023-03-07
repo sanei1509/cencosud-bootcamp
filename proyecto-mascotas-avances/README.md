@@ -46,3 +46,30 @@ REQ : por paquete 4 atributos.
 
 
 # Descripcion de la solucion
+
+
+
+# Entregar avances durante lo dado en las clases
+
+## Logrado hasta el momento:
+ 
+ - crear modulos
+ - crear controladores
+ - crear servicios
+
+ - Creacion y uso de DTO (data transfer object)
+ - CRUD de un endpoint entero desde cero.
+
+... 
+- Creacion de repositorio sin poder implementar uso
+- Creacion de entidad sin poder implementar uso
+
+
+ Pendientes:
+
+- Implementacion de las entidades
+ - Implementacion de repositorio como la ultima capa antes de la persistencia de datos.
+  
+
+
+
