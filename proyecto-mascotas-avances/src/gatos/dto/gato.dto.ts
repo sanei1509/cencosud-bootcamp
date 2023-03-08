@@ -1,10 +1,11 @@
 // Validacions al moment de crear un gato
 
-import { IsNumber, IsPositive, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsPositive, IsString } from "class-validator";
 
 export class GatoDto {
     @IsNumber()
     @IsPositive()
+    @IsOptional()
     id: number;
 
     @IsString()

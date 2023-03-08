@@ -15,12 +15,12 @@ export class GatosController {
         ) {}
 
     @Get()
-    traerTodo(){
+    traerTodo(): Promise<GatoDto[]>{
         return this.servicio.getAll();
     }
 
     @Get(':id')
-    findOne(@Param("id", ParseIntPipe) id: number){
+    findOne(@Param("id", ParseIntPipe) id: number): Promise<GatoDto>{
         return this.servicio.findOne(id);
     }
 

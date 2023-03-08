@@ -1,6 +1,13 @@
 # Proyecto de mascotas
 ``descripción:`` proyecto realizado en simultaneo al curso para ir aplicando todo lo visto y aprendido. 
 
+## INICIO de la app
+Instalador de paquete utilizado : ``yarn``
+
+````
+yarn start:dev 
+````
+
 ## Pauta final brindada por el mentor ``Agustin fiordelisi`` - ``Introducción a NestJS``
 Trabajo Practico: 
  1. Generar una aplicación con al menos 4 Módulos con sus controladores y sus respectivas rutas, verbos HTTP y PipeValidators 
@@ -93,13 +100,20 @@ npm i @nestjs/typeorm
 
 
 ## Conexión a la base de datos.
-Crear modulo y para la conexion con la base MySQL
+Crear modulo para la conexion con la base MySQL
 
 1. Instalar MySQL en la maquina
 2. Instalar Motor de base de datos EJ: ``Workbench``
 3. Definir las entidades con ``TYPEORM``
 4. Chequear autogeneracion en el workbench o en respectivo gestor de base de datos.
 
+- ``Typeorm`` que fácilmemte podría ser ``Sequelize`` o cualquier otro tipo de ORM,
+Nos permite modelas nuestras tablas en la base de datos,
+Nos da acceso al uso de decoradores muy utiles, claves como : ``@Entity`` = Tabla,  ``@Column`` , ``@PrimaryGeneratedColumn``
 
 ``Alternativa al gestor de base de datos`` : podriamos interactuar con la base por cli
+
+# Aclaraciones, repasos conceptuales.
+
+ENTITY``.SERVICE``.TS ->  Biblioteca de métodos que se comunica con la base de datos.
 
