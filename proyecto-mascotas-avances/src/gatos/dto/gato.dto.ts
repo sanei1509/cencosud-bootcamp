@@ -10,4 +10,8 @@ export class GatoDto {
 
     @IsString()
     name: string;
+
+    // @IsOptional()
+    // @IsNumber()
+    // usuario: number;
 }

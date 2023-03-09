@@ -125,6 +125,10 @@ Luego de enlazar con la base de datos, en este caso con MySQL y haber definido l
 Vamos a utilizar @InjectRepository para poder utilizar en nuestro servicios los métodos http brindados por typeOrm.
 
 
+# Relaciones entre las entidades
+
+One to many -> varios gatos a un solo dueńo
+
 
 # Autor
 
