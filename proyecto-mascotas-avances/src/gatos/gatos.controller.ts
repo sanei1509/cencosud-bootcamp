@@ -2,6 +2,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { filter } from 'rxjs';
 import { GatoDto } from './dto/gato.dto';
+import { UpdateGatoDto } from './dto/updateGato.dto';
 import { GatosService } from './gatos.service';
 
 

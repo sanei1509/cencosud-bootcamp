@@ -4,6 +4,7 @@ import { GatoDto } from './dto/gato.dto';
 import { GatoRepository } from './repository/gatos.repository';
 import { Gato } from './entity/gato.entity';
 import { Repository } from 'typeorm';
+import { UpdateGatoDto } from './dto/updateGato.dto';
 
 @Injectable()
 export class GatosService {
@@ -46,20 +47,14 @@ export class GatosService {
     }
 
     // Actualizamos la informacion de un gato
-    update(id: number, gato: GatoDto) {
-        //Buscamos el indice del gato pasado por parametro
-        // const gatoIndex = this.repositorioGato.gatosCollection.findIndex(gato => gato.id === id)
-        //Mutamos ese objeto gato con la nueva informacion
-        // this.repositorioGato.gatosCollection[gatoIndex] = gato;
-        return `${gato.name} ha sido actualizado correctamente`
+    update(id: number, gato: UpdateGatoDto) {
+        return this.repositorioGato.update({id}, gato);
     }
     
     
     
     // Eliminamos un gato por determinado ID
     deleteOne(id: number) {
-        // const gatoIndex = this.repositorioGato.gatosCollection.findIndex(gato => gato.id === id)
-        // this.repositorioGato.gatosCollection.splice(gatoIndex, 1)
-        return `El gato ha sido eliminado correctamente`
+        return this.repositorioGato.delete({id})
     }
 }

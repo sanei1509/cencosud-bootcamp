@@ -117,3 +117,15 @@ Nos da acceso al uso de decoradores muy utiles, claves como : ``@Entity`` = Tabl
 
 ENTITY``.SERVICE``.TS ->  Biblioteca de métodos que se comunica con la base de datos.
 
+
+# Enlace con la base de datos
+
+Luego de enlazar con la base de datos, en este caso con MySQL y haber definido las entidades (tablas)
+
+Vamos a utilizar @InjectRepository para poder utilizar en nuestro servicios los métodos http brindados por typeOrm.
+
+
+
+# Autor
+
+- Santiago Neira
