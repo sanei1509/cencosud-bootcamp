@@ -47,7 +47,7 @@ export class GatosService {
     }
 
     // Actualizamos la informacion de un gato
-    update(id: number, gato: UpdateGatoDto) {
+    update(id: number, gato: GatoDto) {
         return this.repositorioGato.update({id}, gato);
     }
     

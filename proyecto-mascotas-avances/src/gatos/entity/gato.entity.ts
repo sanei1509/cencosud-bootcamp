@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
+import { Usuario } from "src/usuarios/entity/usuario.entity";
 
 @Entity()
 export class Gato{
@@ -7,4 +8,8 @@ export class Gato{
 
     @Column()
     name: string;
+
+    @ManyToOne(type => Usuario, usuario => usuario.gatos)
+    usuario: Usuario;
+    
 }
