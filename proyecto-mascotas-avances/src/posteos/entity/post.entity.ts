@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "src/usuarios/entity/usuario.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Post{
@@ -13,4 +14,8 @@ export class Post{
     
     @Column()
     image: string;
+
+    //relacion de muchos a uno con usuario
+    @ManyToOne(type => Usuario, usuario => usuario.post)
+    usuario: Usuario;
 }

@@ -127,8 +127,11 @@ Vamos a utilizar @InjectRepository para poder utilizar en nuestro servicios los 
 
 # Relaciones entre las entidades
 
-One to many -> varios gatos a un solo dueńo
+- varios gatos a un solo dueńo - un solo dueño con varios gatos
 
+- un gato es amigo de un solo perro . un perro es amigo de un solo gato
+
+- un usuario a muchos posts . muchos posts a un solo usuario
 
 # Autor
 
