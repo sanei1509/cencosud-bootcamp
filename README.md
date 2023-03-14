@@ -29,7 +29,7 @@
 
 ### `Frontend`
 
-- Docker
+- React JS
 
 # Autor
 
