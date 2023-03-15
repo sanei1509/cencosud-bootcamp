@@ -1,73 +1,234 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Proyecto individual entregable
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Letra 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<img src="./letra/proyecto-letra">
 
-## Description
+## Requerimientos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Acciones CRUD para la entidad Reclamo
 
-## Installation
+- obtener todos los reclamos
+- obtener un reclamo por id
+- actualizar un reclamo por id
+- borrar un reclamo por id
+- buscar reclamos por palabra clave (descripcion, problematica)
+- obtener una lista de reclamos filtrados por palabra clave. (descripcion, problematica)
 
-```bash
-$ yarn install
+
+
+## Modelo de reclamos
+
+```json
+{
+  "idReclamo": 1,
+  "descripcion": "El producto no funciona",
+  "detalleCompra": {
+    "formatoCSV": "idProducto, cantidad, precioUnitario, precioTotal",
+    "fechaCompra": "2020-01-01",
+    "nroFactura": "123456",
+    "codigoProducto": "123456",
+  },
+  "problematica": "El producto no funciona",
+}
 ```
 
-## Running the app
+## Entidad Reclamo
 
-```bash
-# development
-$ yarn run start
+```ts
+@Entity()
+export class Reclamo {
+  @PrimaryGeneratedColumn()
+  idReclamo: number;
 
-# watch mode
-$ yarn run start:dev
+  @Column()
+  descripcion: string;
 
-# production mode
-$ yarn run start:prod
+  @Column()
+  detalleCompra: {
+    formatoCSV: string;
+    fechaCompra: string;
+    nroFactura: string;
+    codigoProducto: string;
+  };
+
+  @Column()
+  problematica: string;
+}
 ```
 
-## Test
+## Testing de la API
 
-```bash
-# unit tests
-$ yarn run test
+1. Crear reclamo
 
-# e2e tests
-$ yarn run test:e2e
+```graphql
 
-# test coverage
-$ yarn run test:cov
+mutation {
+  createReclamo(
+    input: {
+      descripcion: "El producto no funciona"
+      detalleCompra: {
+        formatoCSV: "idProducto, cantidad, precioUnitario, precioTotal"
+        fechaCompra: "2020-01-01"
+        nroFactura: "123456"
+        codigoProducto: "123456"
+      }
+      problematica: "El producto no funciona"
+    }
+  ) {
+    idReclamo
+    descripcion
+    detalleCompra {
+      formatoCSV
+      fechaCompra
+      nroFactura
+      codigoProducto
+    }
+    problematica
+  }
+}
 ```
 
-## Support
+2. Leer reclamo
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```graphql
 
-## Stay in touch
+query {
+  reclamo(idReclamo: 1) {
+    idReclamo
+    descripcion
+    detalleCompra {
+      formatoCSV
+      fechaCompra
+      nroFactura
+      codigoProducto
+    }
+    problematica
+  }
+}
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+3. Actualizar reclamo
 
-## License
+```graphql
 
-Nest is [MIT licensed](LICENSE).
+
+mutation {
+  updateReclamo(
+    idReclamo: 1
+    input: {
+      descripcion: "El producto no funciona"
+      detalleCompra: {
+        formatoCSV: "idProducto, cantidad, precioUnitario, precioTotal"
+        fechaCompra: "2020-01-01"
+        nroFactura: "123456"
+        codigoProducto: "123456"
+      }
+      problematica: "El producto no funciona"
+    }
+  ) {
+    idReclamo
+    descripcion
+    detalleCompra {
+      formatoCSV
+      fechaCompra
+      nroFactura
+      codigoProducto
+    }
+    problematica
+  }
+}
+```
+
+
+4. Borrar reclamo
+
+```graphql
+
+mutation {
+  deleteReclamo(idReclamo: 1) {
+    idReclamo
+    descripcion
+    detalleCompra {
+      formatoCSV
+      fechaCompra
+      nroFactura
+      codigoProducto
+    }
+    problematica
+  }
+}
+```
+
+5. Paginación
+
+```graphql
+
+query {
+  reclamos(pagination: { page: 1, limit: 10 }) {
+    data {
+      idReclamo
+      descripcion
+      detalleCompra {
+        formatoCSV
+        fechaCompra
+        nroFactura
+        codigoProducto
+      }
+      problematica
+    }
+    pagination {
+      page
+      limit
+      total
+    }
+  }
+}
+```
+
+# Paso a paso para crear el proyecto
+
+## Instalar NestJS
+
+## Crear proyecto con NestJS
+
+## Instalar graphql en el proyecto, express and apolo
+
+````
+yarn add @nestjs/graphql @nestjs/apollo @apollo/server graphql
+
+````
+
+## Tenemos 2 opciones utilizar ``SCHEMA FIRST`` O ``CODE FIRST``
+ - [Schema First](https://docs.nestjs.com/graphql/quick-start#schema-first)
+  - [Code First](https://docs.nestjs.com/graphql/quick-start#code-first)
+
+  CODE FIRST : es más sencillo de implementar si dominas nest, como es nuestro caso.
+
+
+## Todos los servidores que se ejecutan con GraphQL necesitan al menos tener un ``RESOLVER`` que ejecute una ``QUERY`` o ``MUTATION``.
+
+## Crear un resolver
+
+```ts
+import { Resolver, Query } from '@nestjs/graphql';
+
+@Resolver()
+export class AppResolver {
+  @Query(() => String)
+  getHello(): string {
+    return 'Hello World!';
+  }
+}
+```
+
+
+
+
+
+# Autor
+
+* Santiago Neira
+
+
+
