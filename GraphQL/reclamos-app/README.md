@@ -205,6 +205,7 @@ yarn add @nestjs/graphql @nestjs/apollo @apollo/server graphql
 
   CODE FIRST : es más sencillo de implementar si dominas nest, como es nuestro caso.
 
+  Se podría escribir directamente los tipos con  graphql, pero NestJS nos permite usar Typescript para definir los tipos y que luego se ``traduzcan`` a graphql.
 
 ## Todos los servidores que se ejecutan con GraphQL necesitan al menos tener un ``RESOLVER`` que ejecute una ``QUERY`` o ``MUTATION``.
 
@@ -223,8 +224,11 @@ export class AppResolver {
 ```
 
 
+## Diferencia entre REST y GraphQL
 
+REST: solicitamos todo el recurso y luego filtramos lo que necesitamos.
 
+GRAPHQL: solicitamos solo lo que necesitamos,  una petición personalizada.
 
 # Autor
 

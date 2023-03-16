@@ -3,5 +3,16 @@
 # ------------------------------------------------------
 
 type Query {
+  """mensaje comprobante de funcionamiento graphql"""
   mensaje: String!
+
+  """numero aleatorio del 1 al 10"""
+  numeroAleatorio: Int!
+
+  """numero variable"""
+  numeroVariable(limitNumber: Int!): Int!
+
+  """reclamos"""
+  reclamos: [String!]!
+  pruebaReclamos: String!
 }
