@@ -2,7 +2,7 @@
 
 ## Letra 
 
-<img src="./letra/proyecto-letra">
+<img href="">
 
 ## Requerimientos
 
