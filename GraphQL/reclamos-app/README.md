@@ -2,7 +2,7 @@
 
 ## Letra 
 
-<img src="https://user-images.githubusercontent.com/69850751/225662220-11ccbee1-419c-408f-a0ee-63b23bf87a58.png" />
+<img src="https://user-images.githubusercontent.com/69850751/225662220-11ccbee1-419c-408f-a0ee-63b23bf87a58.png" width="40%"/>
 
 ## Requerimientos
 
