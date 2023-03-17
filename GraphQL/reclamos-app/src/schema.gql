@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Reclamo {
+  id: Int!
+  nroReclamo: Int!
+  descripcion: String!
+  detalleDeCompra: String!
+  problema: String!
+}
+
 type Query {
   """mensaje comprobante de funcionamiento graphql"""
   mensaje: String!
@@ -11,8 +19,5 @@ type Query {
 
   """numero variable"""
   numeroVariable(limitNumber: Int!): Int!
-
-  """reclamos"""
-  reclamos: [String!]!
-  pruebaReclamos: String!
+  reclamos: [Reclamo!]!
 }
