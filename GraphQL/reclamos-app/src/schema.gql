@@ -20,4 +20,9 @@ type Query {
   """numero variable"""
   numeroVariable(limitNumber: Int!): Int!
   reclamos: [Reclamo!]!
+  reclamo(id: Int!): Reclamo!
+}
+
+type Mutation {
+  createReclamo(nroReclamo: Int!, descripcion: String!, detalleDeCompra: String!, problema: String!): Reclamo!
 }

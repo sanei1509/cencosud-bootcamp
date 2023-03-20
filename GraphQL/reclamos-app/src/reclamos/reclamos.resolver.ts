@@ -1,5 +1,6 @@
-import { Query } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query } from '@nestjs/graphql';
 import { Resolver } from '@nestjs/graphql';
+import { type } from 'os';
 import { Reclamo } from './entity/reclamo.entity';
 import { ReclamosService } from './reclamos.service';
 
@@ -22,7 +23,22 @@ export class ReclamosResolver {
     }
 
     // Traer un reclamo por id
+    @Query(() => Reclamo, {name: "reclamo"})
+    getReclamoById(@Args('id', {type: () => Int})id: number
+    ): Reclamo{
+        return this.reclamosService.getReclamoById(id);
+    }
 
+    // Crear un reclamo
+    @Mutation(() => Reclamo) 
+    createReclamo(
+        @Args('nroReclamo', {type: () => Int}) nroReclamo: number,
+        @Args('descripcion') descripcion: string,
+        @Args('detalleDeCompra') detalleDeCompra: string,
+        @Args('problema') problema: string
+    ): Reclamo {
+        return this.reclamosService.createReclamo(nroReclamo, descripcion, detalleDeCompra, problema);
+    }
 
     // Actualizar un reclamo por id
 
