@@ -16,10 +16,20 @@ type Query {
 
   """Listar un ticket solicitado por app"""
   reclamo(id: Int!): Reclamo!
+
+  """Listar todos los tickets de reclamos por palabra clave"""
+  reclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
 }
 
 type Mutation {
+  """Crear un nuevo ticket de reclamo"""
   createReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
+
+  """Actualizar un ticket de reclamo existente"""
+  updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
+
+  """Borrar un ticket de reclamo existente"""
+  deleteReclamo(id: Int!): Boolean!
 }
 
 input CrearReclamoInput {
@@ -31,4 +41,18 @@ input CrearReclamoInput {
 
   """problema del reclamo"""
   problema: String!
+}
+
+input ActualizarReclamoInput {
+  """id del reclamo"""
+  id: Float!
+
+  """titulo del reclamo"""
+  titulo: String
+
+  """detalle de compra del reclamo"""
+  detalleDeCompra: String
+
+  """problema del reclamo"""
+  problema: String
 }

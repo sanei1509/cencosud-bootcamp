@@ -1,8 +1,21 @@
 # Proyecto individual entregable
+``fecha de entrega:`` 15 de abril
+
 
 ## Letra 
 
 <img src="https://user-images.githubusercontent.com/69850751/225662220-11ccbee1-419c-408f-a0ee-63b23bf87a58.png" width="40%"/>
+
+## Desafio Adicional a esto
+
+* Utilizar de alguna manera alguno de los servicios de ``AWS``
+* Utilizar de alguna manera la automatización de aprovisionamiento de ``Terraform``
+
+* Hacer testing de la API (última a cosa a investigar personalmente)
+* Revisar la parte del bonus. (luego de terminar la parte de aplicar testing)
+
+
+##
 
 ## Requerimientos
 
