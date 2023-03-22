@@ -11,7 +11,7 @@ export class Reclamo {
     nroReclamo: number;
 
     @Field(() => String)
-    descripcion: string;
+    titulo: string;
 
     // @Field(() => Object)
     // detalleDeCompra: {

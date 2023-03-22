@@ -1,11 +1,12 @@
 import { Args, Int, Mutation, Query } from '@nestjs/graphql';
 import { Resolver } from '@nestjs/graphql';
 import { type } from 'os';
+import { CrearReclamoInput } from './dto/inputs/crear-reclamo-input';
 import { Reclamo } from './entity/reclamo.entity';
 import { ReclamosService } from './reclamos.service';
 
 //Nuestra especie de controlador de peticiones, pero que vamos a integrar en la app como provider
-@Resolver()
+@Resolver(of => Reclamo)
 export class ReclamosResolver {
     // @Query(() => String)
     // pruebaReclamos(): string {
@@ -13,31 +14,29 @@ export class ReclamosResolver {
     // }
     constructor(
         private readonly reclamosService: ReclamosService
+        // private readonly usuariosService: UsuariosService
     ) {}
 
     // Traer todos los reclamos, arreglo de reclamos
-    @Query(() => [Reclamo], {name: "reclamos"})
+    @Query(() => [Reclamo], {name: "reclamos", description: "Listar todos los tickets de reclamos"})
     getAllReclamos(): Reclamo[]{
         //devuelvo el arreglo de reclamos
         return this.reclamosService.getAllReclamos();
     }
 
     // Traer un reclamo por id
-    @Query(() => Reclamo, {name: "reclamo"})
+    @Query(() => Reclamo, {name: "reclamo", description: "Listar un ticket solicitado por app"})
     getReclamoById(@Args('id', {type: () => Int})id: number
     ): Reclamo{
         return this.reclamosService.getReclamoById(id);
     }
 
     // Crear un reclamo
-    @Mutation(() => Reclamo) 
+    @Mutation(() => Reclamo, {name: "createReclamo"}) 
     createReclamo(
-        @Args('nroReclamo', {type: () => Int}) nroReclamo: number,
-        @Args('descripcion') descripcion: string,
-        @Args('detalleDeCompra') detalleDeCompra: string,
-        @Args('problema') problema: string
+        @Args('crearReclamoInput') crearReclamoInput: CrearReclamoInput,
     ): Reclamo {
-        return this.reclamosService.createReclamo(nroReclamo, descripcion, detalleDeCompra, problema);
+        return this.reclamosService.create(crearReclamoInput);
     }
 
     // Actualizar un reclamo por id

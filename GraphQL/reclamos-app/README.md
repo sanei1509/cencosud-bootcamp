@@ -230,6 +230,45 @@ REST: solicitamos todo el recurso y luego filtramos lo que necesitamos.
 
 GRAPHQL: solicitamos solo lo que necesitamos,  una petición personalizada.
 
+
+## Validaciones de datos ingresados
+para asegurarnos de no guardar datos no deseados en nuestra base de datos vamos a intentar abarcar lo mejor posible las validaciones de datos.
+
+## Instalar class-validator
+
+````
+yarn add class-validator class-transformer
+````
+
+## Instalar TypeORM
+
+````
+yarn add @nestjs/typeorm typeorm
+````
+## Crear la entidad Reclamo
+
+```ts
+@Entity()
+export class Reclamo {
+  @PrimaryGeneratedColumn()
+  idReclamo: number;
+
+  @Column()
+  descripcion: string;
+
+  @Column()
+  detalleCompra: {
+    formatoCSV: string;
+    fechaCompra: string;
+    nroFactura: string;
+    codigoProducto: string;
+  };
+
+  @Column()
+  problematica: string;
+}
+```
+
 # Autor
 
 * Santiago Neira

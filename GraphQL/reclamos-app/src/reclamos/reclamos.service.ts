@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CrearReclamoInput } from './dto/inputs/crear-reclamo-input';
 import { Reclamo } from './entity/reclamo.entity';
 
 @Injectable()
@@ -8,21 +9,21 @@ export class ReclamosService {
         {
             id: 1,
             nroReclamo: 211,
-            descripcion: "Reclamo de prueba",
+            titulo: "Reclamo de prueba",
             detalleDeCompra: "Detalle de compra de prueba",
             problema:  "Problema de prueba"
         },
         {
             id: 2,
             nroReclamo: 212,
-            descripcion: "Reclamo de prueba 2",
+            titulo: "Reclamo de prueba 2",
             detalleDeCompra: "Detalle de compra de prueba 2",
             problema:  "Problema de prueba 2"
         },
         {
             id: 3,
             nroReclamo: 213,
-            descripcion: "Reclamo de prueba 3",
+            titulo: "Reclamo de prueba 3",
             detalleDeCompra: "Detalle de compra de prueba 3",
             problema:  "Problema de prueba 3"
         }
@@ -45,22 +46,31 @@ export class ReclamosService {
             throw new NotFoundException(`Reclamo con ID ${id}, no encontrado`);
     }
 
+    // createReclamo(nroReclamo: number, titulo: string, detalleDeCompra: string, problema: string): Reclamo {
+    //     const newId = this.reclamosCollection.length + 1;
+    //     const nuevoReclamo: Reclamo = {
+    //         id: newId,
+    //         nroReclamo: nroReclamo,
+    //         titulo: titulo,
+    //         detalleDeCompra: detalleDeCompra,
+    //         problema: problema
+    //     }
+    //     this.reclamosCollection.push(nuevoReclamo);
+    //     return nuevoReclamo;
+    // }
+
     // Crear un reclamo
-    createReclamo(nroReclamo: number, descripcion: string, detalleDeCompra: string, problema: string): Reclamo {
-        //Genero un nuevo id: el largo del arreglo + 1
-        const newId = this.reclamosCollection.length + 1;
-        //Genero un nuevo reclamo con los datos recibidos
-        const nuevoReclamo: Reclamo = {
-            id: newId,
-            nroReclamo: nroReclamo,
-            descripcion: descripcion,
-            detalleDeCompra: detalleDeCompra,
-            problema: problema
-        }
-        //Agrego el reclamo a la colección de reclamos
-        this.reclamosCollection.push(nuevoReclamo);
-        //Devuelvo el reclamo creado
-        return nuevoReclamo;
+    create(createTodoInput: CrearReclamoInput ): Reclamo{
+        const reclamo = new Reclamo();
+        reclamo.id = this.reclamosCollection.length + 1;
+        reclamo.nroReclamo = this.reclamosCollection.length + 2;
+        reclamo.titulo = createTodoInput.titulo;
+        reclamo.detalleDeCompra = createTodoInput.detalleDeCompra;
+        reclamo.problema = createTodoInput.problema;
+
+        this.reclamosCollection.push(reclamo);
+
+        return reclamo;
     }
     // Actualizar un reclamo por id
 

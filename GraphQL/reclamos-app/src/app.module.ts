@@ -2,7 +2,6 @@ import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { MensajeModule } from './mensaje/mensaje.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { ReclamosModule } from './reclamos/reclamos.module';
 
@@ -21,7 +20,6 @@ import { ReclamosModule } from './reclamos/reclamos.module';
         ApolloServerPluginLandingPageLocalDefault()
       ]  
     }),
-    MensajeModule,
     ReclamosModule
   ],
   controllers: [],

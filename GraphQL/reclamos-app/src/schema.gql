@@ -5,24 +5,30 @@
 type Reclamo {
   id: Int!
   nroReclamo: Int!
-  descripcion: String!
+  titulo: String!
   detalleDeCompra: String!
   problema: String!
 }
 
 type Query {
-  """mensaje comprobante de funcionamiento graphql"""
-  mensaje: String!
-
-  """numero aleatorio del 1 al 10"""
-  numeroAleatorio: Int!
-
-  """numero variable"""
-  numeroVariable(limitNumber: Int!): Int!
+  """Listar todos los tickets de reclamos"""
   reclamos: [Reclamo!]!
+
+  """Listar un ticket solicitado por app"""
   reclamo(id: Int!): Reclamo!
 }
 
 type Mutation {
-  createReclamo(nroReclamo: Int!, descripcion: String!, detalleDeCompra: String!, problema: String!): Reclamo!
+  createReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
+}
+
+input CrearReclamoInput {
+  """titulo del reclamo"""
+  titulo: String!
+
+  """detalle de compra del reclamo"""
+  detalleDeCompra: String!
+
+  """problema del reclamo"""
+  problema: String!
 }
