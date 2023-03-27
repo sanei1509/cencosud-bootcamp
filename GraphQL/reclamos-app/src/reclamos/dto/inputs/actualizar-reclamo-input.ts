@@ -1,12 +1,12 @@
-import {Field ,InputType } from "@nestjs/graphql";
-import { IsInt, IsNotEmpty, IsOptional, IsString, Max, MaxLength, MinLength } from "class-validator";
+import {Field ,ID,InputType } from "@nestjs/graphql";
+import { IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Max, MaxLength, MinLength } from "class-validator";
 
 @InputType()
 export class ActualizarReclamoInput{
     // Que es lo que requiere tener el input para actualizar un reclamo?
-    @Field(() => Number, {description: 'id del reclamo', nullable: false})
-    @IsInt()
-    id: number;
+    @Field(() => ID, {description: 'id del reclamo', nullable: false})
+    @IsUUID()
+    id: string;
 
 
     @Field(() => String, {description: 'titulo del reclamo', nullable: true})
@@ -15,7 +15,7 @@ export class ActualizarReclamoInput{
     @MaxLength(30)
     @IsNotEmpty()
     @IsOptional()
-    titulo: string;
+    titulo?: string;
 
     @Field(() => String, {description: 'detalle de compra del reclamo', nullable: true})
     @IsString()
@@ -23,7 +23,7 @@ export class ActualizarReclamoInput{
     @MaxLength(50)
     @IsNotEmpty()
     @IsOptional()
-    detalleDeCompra: string;
+    detalleDeCompra?: string;
 
     
     @Field(() => String, {description: 'problema del reclamo', nullable: true})
@@ -32,5 +32,5 @@ export class ActualizarReclamoInput{
     @MinLength(5)
     @MaxLength(50)
     @IsOptional()
-    problema: string;
+    problema?: string;
 }

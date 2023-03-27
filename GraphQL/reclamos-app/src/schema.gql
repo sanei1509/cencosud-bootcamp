@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Reclamo {
-  id: Int!
+  id: ID!
   nroReclamo: Int!
   titulo: String!
   detalleDeCompra: String!
@@ -23,13 +23,13 @@ type Query {
 
 type Mutation {
   """Crear un nuevo ticket de reclamo"""
-  createReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
+  CrearReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
 
   """Actualizar un ticket de reclamo existente"""
   updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
 
   """Borrar un ticket de reclamo existente"""
-  deleteReclamo(id: Int!): Boolean!
+  deleteReclamo(id: String!): Boolean!
 }
 
 input CrearReclamoInput {
@@ -45,7 +45,7 @@ input CrearReclamoInput {
 
 input ActualizarReclamoInput {
   """id del reclamo"""
-  id: Float!
+  id: ID!
 
   """titulo del reclamo"""
   titulo: String

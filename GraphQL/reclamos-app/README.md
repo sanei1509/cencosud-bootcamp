@@ -31,8 +31,11 @@ git clone HTTPS_DEL_REPO
 ````
 yarn install
 ````
-* Levantar la base de datos
 
+* Crear archivo ``.env`` y copiar el contenido de ``.env-template``
+
+* Levantar la base de datos
+ 
 ````
 docker-compose up -d
 ````

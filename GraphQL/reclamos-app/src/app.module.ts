@@ -1,12 +1,22 @@
 import { join } from 'path';
+
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+
 import { ReclamosModule } from './reclamos/reclamos.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    //ENV VAR para configurar la app
+    ConfigModule.forRoot(
+      // Por defecto busca el archivo .env en la raiz del proyecto
+      // {envFilePath: '.env-otra-ruta'}
+      ),
     // Enlace a la app con graphql
     // un solo for root en la app principal
     // luego serian forFeatures en los modulos independientes para agregar mas funcionalidades
@@ -21,6 +31,21 @@ import { ReclamosModule } from './reclamos/reclamos.module';
         ApolloServerPluginLandingPageLocalDefault()
       ]  
     }),
+    // Credenciales de la base de datos para el typeORM
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT, // + para convertir a numero
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [],
+      synchronize: true,
+      autoLoadEntities: true, 
+    }),
+
+
+    // Modulos de la app
     ReclamosModule
   ],
   controllers: [],
