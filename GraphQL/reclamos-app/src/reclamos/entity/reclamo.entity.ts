@@ -26,4 +26,12 @@ export class Reclamo {
     @Field(() => String)
     problema: string;
 
+    // relacion al usuario
+    // @Field(() => Usuario)
+    // usuario: Usuario;
+
+    //relacion al producto
+    // @Field(() => Producto)
+    // producto: Producto;
+
 }

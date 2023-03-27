@@ -15,7 +15,38 @@
 * Revisar la parte del bonus. (luego de terminar la parte de aplicar testing)
 
 
-##
+## Para poder desplegar en tu maquina local
+
+* Instalar ``NodeJS`` y ``Yarn``
+* Instalar ``Docker`` y ``Docker Compose``
+
+* Clonar el repositorio
+
+````
+git clone HTTPS_DEL_REPO
+````
+
+* Instalar las dependencias
+
+````
+yarn install
+````
+* Levantar la base de datos
+
+````
+docker-compose up -d
+````
+``-d`` para que se ejecute desacoplada de la terminal
+
+* Levantar el servidor
+``directorio``: parado en ``/reclamos-app``
+````
+
+yarn start:dev
+````
+
+* Abrir el navegador en ``http://localhost:3000/graphql``
+* Para ver la documentación de la API, ir a ``http://localhost:3000/graphql``
 
 ## Requerimientos
 

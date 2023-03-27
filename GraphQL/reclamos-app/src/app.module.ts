@@ -17,6 +17,7 @@ import { ReclamosModule } from './reclamos/reclamos.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [
+        //plugin para poder relizar y visualizar nuestras consultas en el navegador
         ApolloServerPluginLandingPageLocalDefault()
       ]  
     }),
