@@ -31,6 +31,7 @@ export class Reclamo {
     //     fechaDeCompra: Date;
     //     codigoDeProducto: string;
     // };
+    
     @Field(() => String)
     @Column()
     detalleDeCompra: string;
