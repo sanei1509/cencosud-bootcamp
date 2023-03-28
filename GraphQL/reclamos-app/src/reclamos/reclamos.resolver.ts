@@ -6,6 +6,7 @@ import { Reclamo } from './entity/reclamo.entity';
 import { CrearReclamoInput, ActualizarReclamoInput} from './dto/inputs'; 
 import { ReclamosService } from './reclamos.service';
 import { IsUUID } from 'class-validator';
+import { ParseUUIDPipe } from '@nestjs/common';
 
 // Nuestro resolver va a responder todo lo relacionado a los RECLAMOS (tickets)
 @Resolver(() => Reclamo)
@@ -25,7 +26,7 @@ export class ReclamosResolver {
 
     // Traer un reclamo por id
     @Query(() => Reclamo, {name: "reclamoID", description: "Listar un ticket solicitado por app"})
-    async getReclamoById(@Args('id', {type: () => ID})id: string
+    async getReclamoById(@Args('id', {type: () => ID}, ParseUUIDPipe)id: string
     ): Promise<Reclamo>{
         return this.reclamosService.getReclamoById(id);
     }
@@ -39,10 +40,10 @@ export class ReclamosResolver {
     }
 
     // Actualizar un reclamo por id
-    @Mutation(() => String, {name: "updateReclamo", description: "Actualizar un ticket de reclamo existente"})
-    updateReclamo(
+    @Mutation(() => Reclamo, {name: "updateReclamo", description: "Actualizar un ticket de reclamo existente"})
+    async updateReclamo(
         @Args('actualizarReclamoInput') actualizarReclamoInput: ActualizarReclamoInput,
-    ): string{
+    ): Promise<Reclamo>{
         return this.reclamosService.update(actualizarReclamoInput.id ,actualizarReclamoInput)
     }
 

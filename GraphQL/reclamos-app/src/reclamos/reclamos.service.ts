@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { tituloArgsFilter } from './dto/args/tituloArgs';
 
 import { Reclamo } from './entity/reclamo.entity';
@@ -77,8 +77,22 @@ export class ReclamosService {
     }
     
     // Actualizar un reclamo por id
-    update(id: string, actualizarReclamoInput: ActualizarReclamoInput): string{
-        return "reclamoActualizado"
+    async update(id: string, actualizarReclamoInput: ActualizarReclamoInput): Promise<Reclamo>{
+        //"preload" si existe el reclamo con ese id lo actualiza y devuelve el reclamo actualizado
+        // No pude con el preload
+        //Buscamos el reclamo por id
+        const reclamo = await this.getReclamoById(id);
+        console.log(reclamo);
+
+        //Actualizamos los datos del reclamo si llegan
+        reclamo.titulo = actualizarReclamoInput.titulo ? actualizarReclamoInput.titulo : reclamo.titulo;
+        reclamo.detalleDeCompra = actualizarReclamoInput.detalleDeCompra ? actualizarReclamoInput.detalleDeCompra : reclamo.detalleDeCompra;
+        reclamo.problema = actualizarReclamoInput.problema ? actualizarReclamoInput.problema : reclamo.problema;
+
+
+        const reclamoActualizado = await this.reclamosRepository.save(reclamo);
+
+        return reclamoActualizado;
     }
 
 
