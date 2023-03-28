@@ -316,6 +316,31 @@ export class Reclamo {
 }
 ```
 
+# Autorización y Autenticación
+
+``Autorización``: es la capacidad de un usuario para acceder a un recurso.
+
+``Autenticación``: es la capacidad de un usuario para identificarse.
+
+Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
+
+1. Crear una sistema de REGISTRO.
+
+2. Crear un sistema de LOGIN.
+
+### REGLAS DE LA APP
+ - Si la persona no esta logueada, solo puede ver los reclamos.
+
+ - Si la persona esta logueada, puede ver los reclamos y crear reclamos.
+
+ - Si la persona es ADMIN, puede ver los reclamos, crear reclamos y borrar reclamos.
+
+ 
+
+Además de la encriptación de contraseñas.
+
+
+
 # Autor
 
 * Santiago Neira

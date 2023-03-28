@@ -8,6 +8,7 @@ type Reclamo {
   titulo: String!
   detalleDeCompra: String!
   problema: String!
+  activo: Boolean!
 }
 
 type Query {

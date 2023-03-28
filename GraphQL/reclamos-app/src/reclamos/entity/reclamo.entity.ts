@@ -40,6 +40,11 @@ export class Reclamo {
     @Column()
     problema: string;
 
+    // Baja logica
+    @Field(() => Boolean)
+    @Column({default: true})
+    activo: boolean;
+
     // relacion al usuario
     // @Field(() => Usuario)
     // usuario: Usuario;
@@ -47,5 +52,4 @@ export class Reclamo {
     //relacion al producto
     // @Field(() => Producto)
     // producto: Producto;
-
 }
