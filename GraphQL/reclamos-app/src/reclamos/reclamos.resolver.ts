@@ -48,10 +48,10 @@ export class ReclamosResolver {
     }
 
     // Borrar un reclamo por id
-    @Mutation(() => Boolean, {name: "deleteReclamo", description: "Borrar un ticket de reclamo existente"})
-    deleteReclamo(
-        @Args('id', {type: () => String}) id: string
-    ): string {
+    @Mutation(() => Reclamo, {name: "deleteID", description: "Borrar un ticket de reclamo existente"})
+    async deleteReclamo(
+        @Args('id', {type: () => ID}) id: string
+    ): Promise<Reclamo>{
         return this.reclamosService.delete(id);
     }
 

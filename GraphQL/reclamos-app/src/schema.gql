@@ -29,7 +29,7 @@ type Mutation {
   updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
 
   """Borrar un ticket de reclamo existente"""
-  deleteReclamo(id: String!): Boolean!
+  deleteID(id: ID!): Reclamo!
 }
 
 input CrearReclamoInput {
