@@ -11,11 +11,11 @@ type Reclamo {
 }
 
 type Query {
-  """Listar todos los tickets de reclamos"""
+  """Listar todos los tickets de reclamos DB"""
   reclamos: [Reclamo!]!
 
   """Listar un ticket solicitado por app"""
-  reclamo(id: Int!): Reclamo!
+  reclamoID(id: ID!): Reclamo!
 
   """Listar todos los tickets de reclamos por palabra clave"""
   reclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
@@ -26,7 +26,7 @@ type Mutation {
   CrearReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
 
   """Actualizar un ticket de reclamo existente"""
-  updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
+  updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): String!
 
   """Borrar un ticket de reclamo existente"""
   deleteReclamo(id: String!): Boolean!

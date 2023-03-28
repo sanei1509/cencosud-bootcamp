@@ -1,10 +1,11 @@
-import { Args, Int, Mutation, Query } from '@nestjs/graphql';
+import { Args, ID, Int, Mutation, Query } from '@nestjs/graphql';
 import { Resolver } from '@nestjs/graphql';
 import { type } from 'os';
 
 import { Reclamo } from './entity/reclamo.entity';
 import { CrearReclamoInput, ActualizarReclamoInput} from './dto/inputs'; 
 import { ReclamosService } from './reclamos.service';
+import { IsUUID } from 'class-validator';
 
 // Nuestro resolver va a responder todo lo relacionado a los RECLAMOS (tickets)
 @Resolver(() => Reclamo)
@@ -16,16 +17,16 @@ export class ReclamosResolver {
     ) {}
 
     // Traer todos los reclamos, arreglo de reclamos
-    @Query(() => [Reclamo], {name: "reclamos", description: "Listar todos los tickets de reclamos"})
-    getAllReclamos(): string{
+    @Query(() => [Reclamo], {name: "reclamos", description: "Listar todos los tickets de reclamos DB"})
+    async getAllReclamos(): Promise<Reclamo[]> {
         //devuelvo el arreglo de reclamos
         return this.reclamosService.getAllReclamos();
     }
 
     // Traer un reclamo por id
-    @Query(() => Reclamo, {name: "reclamo", description: "Listar un ticket solicitado por app"})
-    getReclamoById(@Args('id', {type: () => Int})id: string
-    ): Reclamo{
+    @Query(() => Reclamo, {name: "reclamoID", description: "Listar un ticket solicitado por app"})
+    async getReclamoById(@Args('id', {type: () => ID})id: string
+    ): Promise<Reclamo>{
         return this.reclamosService.getReclamoById(id);
     }
 
@@ -38,10 +39,10 @@ export class ReclamosResolver {
     }
 
     // Actualizar un reclamo por id
-    @Mutation(() => Reclamo, {name: "updateReclamo", description: "Actualizar un ticket de reclamo existente"})
-    async updateReclamo(
+    @Mutation(() => String, {name: "updateReclamo", description: "Actualizar un ticket de reclamo existente"})
+    updateReclamo(
         @Args('actualizarReclamoInput') actualizarReclamoInput: ActualizarReclamoInput,
-    ): Promise<Reclamo> {
+    ): string{
         return this.reclamosService.update(actualizarReclamoInput.id ,actualizarReclamoInput)
     }
 

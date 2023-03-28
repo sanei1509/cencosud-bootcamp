@@ -43,27 +43,28 @@ export class ReclamosService {
 
     // Traer todos los reclamos, arreglo de reclamos
     // Filtro : si recibimos titulo especificado se aplica el filtro
-    getAllReclamos(titulo? : tituloArgsFilter): string{
+    getAllReclamos(titulo? : tituloArgsFilter): Promise<Reclamo[]>{
+        // TODO: /filtrar titulo /paginar
+        const reclamosDB = this.reclamosRepository.find(); 
+
         //Si recibimos titulo, devuelvo el arreglo de reclamos cuyo titulo contenga la palabra
         if (titulo)
-            // return this.reclamosRepository.filter(reclamo => reclamo.titulo.includes(titulo.palabraClave));
-            return "Devuelvo arreglo de reclamos que tengan en su titulo la palabra clave"
-        
+            return this.reclamosRepository.find({where: {titulo: titulo.palabraClave}});
+            
             
         //Si no recibimos titulo, devuelvo el arreglo de reclamos
-        return "Devuelvo todos los reclamos []";
+        return this.reclamosRepository.find();
     }
 
-    getReclamoById(id: string): Reclamo{
+    async getReclamoById(id: string): Promise<Reclamo>{
         //Si el reclamo no existe, devuelvo null
-        let reclamo = null;
-        // reclamo = this.reclamosRepository.find(reclamo => reclamo.id === id);
-        
+        const reclamoSolicitado = await this.reclamosRepository.find({where: {id: id}});
 
-        if (reclamo)
-            return reclamo;
-        else
+        if (reclamoSolicitado.length === 0)
             throw new NotFoundException(`Reclamo con ID ${id}, no encontrado`);
+        else {
+            return reclamoSolicitado[0];
+        }
     }
 
     // Crear un reclamo
@@ -76,24 +77,8 @@ export class ReclamosService {
     }
     
     // Actualizar un reclamo por id
-    update(id: string, actualizarReclamoInput: ActualizarReclamoInput): Reclamo{
-        // Desturcturing del objeto actualizarReclamoInput
-        const {titulo, detalleDeCompra, problema} = actualizarReclamoInput;
-
-        // Busco el reclamo que tengo que utilizar por id recibido
-        const reclamo = this.getReclamoById(id);
-
-        console.log(reclamo);
-        // Actualizo los datos del reclamo
-        if (titulo)
-            reclamo.titulo = titulo;
-        if (detalleDeCompra)
-            reclamo.detalleDeCompra = detalleDeCompra;
-        if (problema)
-            reclamo.problema = problema;
-        
-        // Devuelvo el reclamo actualizado
-        return reclamo;
+    update(id: string, actualizarReclamoInput: ActualizarReclamoInput): string{
+        return "reclamoActualizado"
     }
 
 
