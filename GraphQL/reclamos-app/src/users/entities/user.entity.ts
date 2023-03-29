@@ -1,23 +1,44 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Entity } from 'typeorm';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { IsEmail, IsUUID } from 'class-validator';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity("Usuarios")
+@Entity("usuarios")
 @ObjectType()
 export class Usuario {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
-
-  // id
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
 
   // email
+  @Field(() => String)
+  @Column({unique: true})
+  @IsEmail()
+  email: string;
 
   // password
+  // @Field(() => String) // no se debe devolver el password
+  @Column()
+  password: string;
 
-  // name
+  // roles // USER, ADMIN , arreglo de strings
+  @Field(() => [String])
+  @Column({
+    type: 'text',
+    array: true,
+    default: ['USER']
+  })
+  roles: string[];
 
-  // createdAt
-
-  // updatedAt
+  // estado // ACTIVE
+  @Field(() => String)
+  @Column({
+    type: 'boolean',
+    default: true
+  })
+  active: boolean;
 
   // relacion con sus tickets de reclamos
+  // @Field(() => [Reclamo])
+  // @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
 }

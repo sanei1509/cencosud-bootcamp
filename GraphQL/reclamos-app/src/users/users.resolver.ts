@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ID } from '@nestjs/graphql';
 import { ServicioUsuarios } from './users.service';
 import { Usuario } from './entities/user.entity';
 import { CrearUsuarioInput } from './dto/create-user.input';
@@ -14,18 +14,26 @@ export class UsuariosResolver {
   }
 
   @Query(() => Usuario, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number)
-  : string {
+  async findOne(@Args('id', { type: () => ID }) id: string)
+  : Promise<Usuario> {
     return this.servicioUsuarios.findOne(id);
   }
 
-  @Mutation(() => Usuario)
-  updateUsuario(@Args('updateUsuarioInput') updateUsuarioInput: ActualizarUsuarioInput) {
-    return this.servicioUsuarios.update(updateUsuarioInput.id, updateUsuarioInput);
-  }
+  
+  // @Mutation(() => Usuario)
+  // updateUsuario(@Args('updateUsuarioInput') updateUsuarioInput: ActualizarUsuarioInput) {
+  //   return this.servicioUsuarios.update(updateUsuarioInput.id, updateUsuarioInput);
+  // }
 
+  // Eliminado permanente
   @Mutation(() => Usuario)
-  removeUsuario(@Args('id', { type: () => Int }) id: number) {
+  removeUsuario(@Args('id', { type: () => ID }) id: string) {
     return this.servicioUsuarios.remove(id);
   }
+  // Baja logica de usuario
+  @Mutation(() => Usuario)
+  async BlockUser(@Args('id', { type: () => ID }) id: number): Promise<Usuario> {
+    return this.servicioUsuarios.block(id);
+  }
+
 }

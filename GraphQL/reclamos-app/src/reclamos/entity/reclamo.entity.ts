@@ -15,7 +15,7 @@ export class Reclamo {
     id: string;
 
     //El numero de reclamo es unico y debe auto generarse
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn("increment")
     @IsPositive()
     @Field(() => Int)
     nroReclamo: number;

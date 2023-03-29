@@ -11,26 +11,51 @@ type Reclamo {
   activo: Boolean!
 }
 
+type Usuario {
+  id: ID!
+  email: String!
+  roles: [String!]!
+  active: String!
+}
+
+type AuthResponse {
+  token: String!
+  usuario: Usuario!
+}
+
 type Query {
   """Listar todos los tickets de reclamos DB"""
-  reclamos: [Reclamo!]!
+  ListarReclamos: [Reclamo!]!
 
   """Listar un ticket solicitado por app"""
-  reclamoID(id: ID!): Reclamo!
+  SolicitarReclamoID(id: ID!): Reclamo!
 
-  """Listar todos los tickets de reclamos por palabra clave"""
-  reclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
+  """Listar todos los tickets de reclamos por palabra clave ej = 'Falla' """
+  ReclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
+  users: [Usuario!]!
+  user(id: ID!): Usuario!
+
+  """Validar Token de Usuario, Devuelve datos del usuario"""
+  ValidoToken: AuthResponse!
 }
 
 type Mutation {
   """Crear un nuevo ticket de reclamo"""
   CrearReclamo(crearReclamoInput: CrearReclamoInput!): Reclamo!
 
-  """Actualizar un ticket de reclamo existente"""
-  updateReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
+  """Actualizar un ticket de reclamo existente enviando ID"""
+  ActualizarReclamo(actualizarReclamoInput: ActualizarReclamoInput!): Reclamo!
 
-  """Borrar un ticket de reclamo existente"""
-  deleteID(id: ID!): Reclamo!
+  """Borrar un ticket de reclamo existente de DB"""
+  EliminarReclamoFisicamente(id: ID!): Reclamo!
+  removeUsuario(id: ID!): Usuario!
+  BlockUser(id: ID!): Usuario!
+
+  """Registro de Usuario en la base de datos, Generar Auth Token"""
+  Register(registroUsuarioInput: RegistroUsuarioInput!): AuthResponse!
+
+  """Inicio de sesión de Usuario, Incluir Auth Token"""
+  Login(loginUsuarioInput: LoginUsuarioInput!): AuthResponse!
 }
 
 input CrearReclamoInput {
@@ -56,4 +81,16 @@ input ActualizarReclamoInput {
 
   """id del reclamo"""
   id: ID!
+}
+
+input RegistroUsuarioInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input LoginUsuarioInput {
+  username: String
+  email: String!
+  password: String!
 }

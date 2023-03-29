@@ -95,17 +95,20 @@ export class ReclamosService {
         return reclamoActualizado;
     }
 
-
     // Borrar un reclamo por id
     async delete(id: string): Promise<Reclamo> {
         // Busco el reclamo solicitado para eliminar
         const reclamoEliminado = await this.getReclamoById(id);
-        console.log(reclamoEliminado);
-        
-        // Elimino el reclamo
-        await this.reclamosRepository.remove(reclamoEliminado);
+        let nroReclamo = reclamoEliminado.nroReclamo;
 
-        return {...reclamoEliminado, id};
+        // Elimino el reclamo
+        console.log(await this.reclamosRepository.remove(reclamoEliminado));
+
+        //Cargo nroReclamo y ID en el Reclamo eliminado
+        reclamoEliminado.nroReclamo = nroReclamo;
+        reclamoEliminado.id = id;
+        // return {...reclamoEliminado, id};
+        return reclamoEliminado; 
     }
 
 

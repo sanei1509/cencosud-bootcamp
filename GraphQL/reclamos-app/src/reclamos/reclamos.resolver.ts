@@ -18,14 +18,14 @@ export class ReclamosResolver {
     ) {}
 
     // Traer todos los reclamos, arreglo de reclamos
-    @Query(() => [Reclamo], {name: "reclamos", description: "Listar todos los tickets de reclamos DB"})
+    @Query(() => [Reclamo], {name: "ListarReclamos", description: "Listar todos los tickets de reclamos DB"})
     async getAllReclamos(): Promise<Reclamo[]> {
         //devuelvo el arreglo de reclamos
         return this.reclamosService.getAllReclamos();
     }
 
     // Traer un reclamo por id
-    @Query(() => Reclamo, {name: "reclamoID", description: "Listar un ticket solicitado por app"})
+    @Query(() => Reclamo, {name: "SolicitarReclamoID", description: "Listar un ticket solicitado por app"})
     async getReclamoById(@Args('id', {type: () => ID}, ParseUUIDPipe)id: string
     ): Promise<Reclamo>{
         return this.reclamosService.getReclamoById(id);
@@ -40,7 +40,7 @@ export class ReclamosResolver {
     }
 
     // Actualizar un reclamo por id
-    @Mutation(() => Reclamo, {name: "updateReclamo", description: "Actualizar un ticket de reclamo existente"})
+    @Mutation(() => Reclamo, {name: "ActualizarReclamo", description: "Actualizar un ticket de reclamo existente enviando ID"})
     async updateReclamo(
         @Args('actualizarReclamoInput') actualizarReclamoInput: ActualizarReclamoInput,
     ): Promise<Reclamo>{
@@ -48,7 +48,7 @@ export class ReclamosResolver {
     }
 
     // Borrar un reclamo por id
-    @Mutation(() => Reclamo, {name: "deleteID", description: "Borrar un ticket de reclamo existente"})
+    @Mutation(() => Reclamo, {name: "EliminarReclamoFisicamente", description: "Borrar un ticket de reclamo existente de DB"})
     async deleteReclamo(
         @Args('id', {type: () => ID}) id: string
     ): Promise<Reclamo>{
@@ -56,7 +56,7 @@ export class ReclamosResolver {
     }
 
     // Traer reclamos por palabra clave (descripcion, problematica)
-    @Query(() => [Reclamo], {name: "reclamosPorPalabraClave", description: "Listar todos los tickets de reclamos por palabra clave"})
+    @Query(() => [Reclamo], {name: "ReclamosPorPalabraClave", description: "Listar todos los tickets de reclamos por palabra clave ej = 'Falla' "})
     getReclamoPorPalabraClave(
         @Args('palabraClave') palabraClave: string
     // ): Reclamo[]{
