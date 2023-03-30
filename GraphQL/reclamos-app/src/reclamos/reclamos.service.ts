@@ -113,17 +113,33 @@ export class ReclamosService {
 
 
     // Traer reclamos por palabra clave (Titulo, problema)
-    getReclamoPorPalabraClave(palabraClave: string): string{
+    async getReclamoPorPalabraClave(palabraClave: string): Promise<Reclamo[]>{
+
+        // Guardo todos los reclamos en un arreglo
+        const reclamos = await this.getAllReclamos();
+
+        const reclamosToList: Reclamo[] = [];
+
 
         // Si la palabra clave esta vacia, devuelvo todos los reclamos
         if (!palabraClave || palabraClave === "")
-        return "Devuelvo todos los reclamos";
+            return this.getAllReclamos();
 
         //Limpio ambas cadenas de texto para compararlas
-        // palabraClave = palabraClave.trim().toLowerCase();
-        // return this.reclamosRepository.filter(reclamo => reclamo.titulo.toLowerCase().includes(palabraClave) || reclamo.problema.toLowerCase().includes(palabraClave));
-        return "Devuelvo los reclamos filtrados por palabra clave"
+        // recorro todos los reclamos y preparo mi array de devolución
+        reclamos.forEach(reclamo => {
+            if (reclamo.titulo.toLowerCase().includes(palabraClave) || reclamo.problema.toLowerCase().includes(palabraClave))
+                reclamosToList.push(reclamo);
+        });
+
+        if (reclamosToList.length === 0)
+            throw new NotFoundException(`Reclamo con palabra clave ${palabraClave}, no encontrado`);
+        else {
+            return reclamosToList;
+        }
      }
+
+
 
 
     // Traer una lista de reclamos filtrados por palabra clave. (titulo, Problema)

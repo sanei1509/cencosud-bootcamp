@@ -57,12 +57,11 @@ export class ReclamosResolver {
 
     // Traer reclamos por palabra clave (descripcion, problematica)
     @Query(() => [Reclamo], {name: "ReclamosPorPalabraClave", description: "Listar todos los tickets de reclamos por palabra clave ej = 'Falla' "})
-    getReclamoPorPalabraClave(
+    async getReclamoPorPalabraClave(
         @Args('palabraClave') palabraClave: string
     // ): Reclamo[]{
-    ): string{
-        return "Aqui toy"
-        // return this.reclamosService.getReclamoPorPalabraClave(palabraClave);
+    ): Promise<Reclamo[]>{
+        return this.reclamosService.getReclamoPorPalabraClave(palabraClave.toLocaleLowerCase().trim())
     }
 
     // Traer una lista de reclamos filtrados por palabra clave. (descripcion, problematica)
