@@ -9,4 +9,5 @@ services:
     environment:
       MONGO_DATABASE: pokemon-app
     volumes:
-      - ./mongo:/data/db
+      - ./mongo:/data
+
