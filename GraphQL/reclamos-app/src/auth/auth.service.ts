@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { RegistroUsuarioInput } from './dto/inputs/registro.input';
 import { LoginUsuarioInput } from './dto/inputs/login.input';
 import { AuthResponse } from './types/auth.response';
 import { ServicioUsuarios } from 'src/users/users.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -23,8 +24,26 @@ export class AuthService {
 
   async login(loginUsuarioInput: LoginUsuarioInput): Promise<AuthResponse> {
     console.log({loginUsuarioInput});
-    throw new Error("Method not implemented.");
+
+    // Validar usuario
+    const {email, password} = loginUsuarioInput;
+    const usuario = await this.servicioUsuarios.findOneByEmail(email);
+
+    console.log(usuario);
+    console.log(bcrypt.compareSync(password, usuario.password));
+    
+    // En caso de coincidencia en contraseñas
+    if(bcrypt.compareSync(password, usuario.password)) {
+      // Genero token
+      const token = `ABC123`
+
+      
+      return {usuario, token}
+    }
+
+    throw new BadRequestException("Contraseña invalida, Intente de nuevo")
   }
+  
 
   //revalidacion de token
   async revalidarToken(): Promise<string>{

@@ -32,8 +32,8 @@ type Query {
 
   """Listar todos los tickets de reclamos por palabra clave ej = 'Falla' """
   ReclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
-  users: [Usuario!]!
-  user(id: ID!): Usuario!
+  ListarUsuarios: [Usuario!]!
+  BuscarUsuarioByID(id: ID!): Usuario!
 
   """Validar Token de Usuario, Devuelve datos del usuario"""
   ValidoToken: AuthResponse!

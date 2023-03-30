@@ -15,6 +15,5 @@ export class LoginUsuarioInput {
 
   @Field(() => String, {nullable: false})
   @IsNotEmpty()
-  @MinLength(6)
   password: string;
 }

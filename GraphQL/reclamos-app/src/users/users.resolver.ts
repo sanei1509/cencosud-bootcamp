@@ -8,12 +8,12 @@ import { ActualizarUsuarioInput } from './dto/update-user.input';
 export class UsuariosResolver {
   constructor(private readonly servicioUsuarios: ServicioUsuarios) {}
 
-  @Query(() => [Usuario], { name: 'users' })
+  @Query(() => [Usuario], { name: 'ListarUsuarios' })
   async findAll(): Promise<Usuario[]> {
     return this.servicioUsuarios.findAll();
   }
 
-  @Query(() => Usuario, { name: 'user' })
+  @Query(() => Usuario, { name: 'BuscarUsuarioByID' })
   async findOne(@Args('id', { type: () => ID }) id: string)
   : Promise<Usuario> {
     return this.servicioUsuarios.findOne(id);

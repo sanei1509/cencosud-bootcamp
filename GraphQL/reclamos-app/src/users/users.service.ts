@@ -35,12 +35,31 @@ export class ServicioUsuarios {
   }
 
   async findAll(): Promise<Usuario[]> {
-    return [];
+    // buscamos todos los usuarios
+    const usuarios = await this.repositorioUsuarios.find();
+    return usuarios;
   }
 
   async findOne(id: string): Promise<Usuario> {
-     throw new Error("Method not implemented.");
+    throw new Error("Metodo no implementado aun")
   }
+
+
+  async findOneByEmail(email: string): Promise<Usuario> {
+    //buscamos todos los usuarios
+    const usuarios = await this.findAll();
+
+    //recorremos todos los usuarios
+    for (const usuario of usuarios) {
+      //si el usuario tiene el email que estamos buscando
+      if (usuario.email === email) {
+        //retornamos el usuario
+        return usuario;
+      }
+    }
+        throw new Error("Usuario no encontrado en la base de datos")
+
+}
 
   update(id: string, updateUserInput: ActualizarUsuarioInput): string {
     return `This action updates a #${id} user`;
