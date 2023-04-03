@@ -59,8 +59,15 @@ export class AuthService {
   
 
   //revalidamos token cuando se refresca la pagina  / se cierra y se vuelve a abrir el navegador
-  async revalidarToken(): Promise<string>{
-    return "Validando Token de usuario..."
+  async validarToken(usuario: Usuario): Promise<AuthResponse>{
+
+    // Generar tokens con JWT
+    const token = this.getJwtToken(usuario);
+
+    // Devolver token y usuario creado, devuelto en el metodo de creacion de usuario
+    return {token, usuario}
+    
+    // throw new Error("Validando Token de usuario...");
   }
 
 

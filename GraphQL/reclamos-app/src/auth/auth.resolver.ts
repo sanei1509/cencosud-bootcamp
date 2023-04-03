@@ -6,6 +6,8 @@ import { LoginUsuarioInput } from './dto/inputs/login.input';
 import { AuthResponse } from './types/auth.response';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './guards/jwt-auth-guards';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { Usuario } from 'src/users/entities/user.entity';
 
 
 
@@ -28,15 +30,17 @@ export class AuthResolver {
   // Validación de Token
   @Query(() => AuthResponse, {name: "ValidoToken", description: "Validar Token de Usuario, Devuelve datos del usuario"})
   @UseGuards( JwtAuthGuard )
-  revalidarToken(/*Current USER*/): AuthResponse{
-    // return this.authService.revalidarToken();s
-    throw new Error("Method not implemented.");
+  async validoToken(@CurrentUser() usuario : Usuario): Promise<AuthResponse>{
+    console.log({usuario})
+    return this.authService.validarToken(usuario);
+
+    // throw new Error("Method not implemented.");
   }
 
   // Validación usuario
   @Query(() => AuthResponse, {name: "ValidoUsuario", description: "Validar Usuario, Devuelve datos del usuario"})
   @UseGuards( JwtAuthGuard )
-  revalidarUsuario(/*Current USER*/): AuthResponse{
+  validoUsuario(/*Current USER*/): AuthResponse{
     // return this.authService.validarUsuario(id);
     throw new Error("Method not implemented.");
   }

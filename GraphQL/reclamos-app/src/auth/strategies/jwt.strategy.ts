@@ -24,11 +24,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   // El payload debe tener cierto contrato de estructura
   async validate(payload: JwtPayloadContract): Promise<Usuario>  {
-    console.log(payload);
-
+    // console.log(payload);
     const {id} = payload;
     const usuario = this.authService.validarUsuario(id);
 
-    throw new UnauthorizedException("Trabajando en la validación del token");
+    delete (await usuario).password;
+    console.log({usuario});
+
+    return usuario;
+    // throw new UnauthorizedException("Trabajando en la validación del token");
   }
 }

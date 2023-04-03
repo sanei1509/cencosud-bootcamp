@@ -19,12 +19,6 @@ export class UsuariosResolver {
     return this.servicioUsuarios.findOneById(id);
   }
 
-  
-  // @Mutation(() => Usuario)
-  // updateUsuario(@Args('updateUsuarioInput') updateUsuarioInput: ActualizarUsuarioInput) {
-  //   return this.servicioUsuarios.update(updateUsuarioInput.id, updateUsuarioInput);
-  // }
-
   // Eliminado permanente
   @Mutation(() => Usuario)
   removeUsuario(@Args('id', { type: () => ID }) id: string) {
