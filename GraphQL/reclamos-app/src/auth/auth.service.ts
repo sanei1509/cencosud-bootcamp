@@ -4,20 +4,32 @@ import { LoginUsuarioInput } from './dto/inputs/login.input';
 import { AuthResponse } from './types/auth.response';
 import { ServicioUsuarios } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  // Inyecto mi servicio de usuarios
+  // Inyecto mi servicio de usuarios / servicio de JWT
   constructor(
-    private readonly servicioUsuarios: ServicioUsuarios
+    private readonly servicioUsuarios: ServicioUsuarios,
+    private readonly servicioJWT: JwtService
   ){}
+
+  // Obtenemos el token de usuario
+  private getJwtToken(usuario: any): string {
+    // payload es el objeto que se va a encriptar en JWT
+    return this.servicioJWT.sign({id: usuario.id});
+  }
 
   async register(registroUsuarioInput: RegistroUsuarioInput): Promise<AuthResponse>{
     console.log({registroUsuarioInput});
     // Crear usuario
     const usuario = await this.servicioUsuarios.create(registroUsuarioInput);
     // Generar Token
-    const token = "ABC123"
+    // const token = "ABC123"
+
+    // Generar tokens con JWT
+    const token = this.getJwtToken(usuario);
+
     // Devolver token y usuario creado, devuelto en el metodo de creacion de usuario
     return {token, usuario}
   }
@@ -35,7 +47,7 @@ export class AuthService {
     // En caso de coincidencia en contraseñas
     if(bcrypt.compareSync(password, usuario.password)) {
       // Genero token
-      const token = `ABC123`
+      const token = this.getJwtToken(usuario);
 
       
       return {usuario, token}
