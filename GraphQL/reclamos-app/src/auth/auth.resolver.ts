@@ -30,7 +30,7 @@ export class AuthResolver {
   // Validación de Token
   @Query(() => AuthResponse, {name: "ValidoToken", description: "Validar Token de Usuario, Devuelve datos del usuario"})
   @UseGuards( JwtAuthGuard )
-  async validoToken(@CurrentUser() usuario : Usuario): Promise<AuthResponse>{
+  validoToken(@CurrentUser() usuario : Usuario): AuthResponse{
     console.log({usuario})
     return this.authService.validarToken(usuario);
 

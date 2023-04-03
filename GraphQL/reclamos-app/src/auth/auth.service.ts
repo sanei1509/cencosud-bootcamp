@@ -17,7 +17,8 @@ export class AuthService {
 
   // Obtenemos el token de usuario
   private getJwtToken(usuario: any): string {
-    // payload es el objeto que se va a encriptar en JWT
+    // Que hacemos aca?
+    //firmamos el token con el id del usuario 
     return this.servicioJWT.sign({id: usuario.id});
   }
 
@@ -59,7 +60,7 @@ export class AuthService {
   
 
   //revalidamos token cuando se refresca la pagina  / se cierra y se vuelve a abrir el navegador
-  async validarToken(usuario: Usuario): Promise<AuthResponse>{
+  validarToken(usuario: Usuario): AuthResponse{
 
     // Generar tokens con JWT
     const token = this.getJwtToken(usuario);
