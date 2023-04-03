@@ -37,6 +37,9 @@ type Query {
 
   """Validar Token de Usuario, Devuelve datos del usuario"""
   ValidoToken: AuthResponse!
+
+  """Validar Usuario, Devuelve datos del usuario"""
+  ValidoUsuario: AuthResponse!
 }
 
 type Mutation {

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegistroUsuarioInput } from 'src/auth/dto/inputs/registro.input';
 import { Repository } from 'typeorm';
@@ -40,8 +40,16 @@ export class ServicioUsuarios {
     return usuarios;
   }
 
-  async findOne(id: string): Promise<Usuario> {
-    throw new Error("Metodo no implementado aun")
+  async findOneById(id: string): Promise<Usuario> {
+    try{
+      const user = await this.repositorioUsuarios.findOne({where: {id}});
+      console.log(user);
+      console.log(`Usuario ${user.email}, ${user.roles} Listo para retorno`)
+      return user;
+    }
+    catch(error){
+      throw new NotFoundException(`Usuario de id "${id}" no encontrado en la base de datos`)
+    }
   }
 
 

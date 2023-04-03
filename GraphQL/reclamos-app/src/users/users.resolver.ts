@@ -16,7 +16,7 @@ export class UsuariosResolver {
   @Query(() => Usuario, { name: 'BuscarUsuarioByID' })
   async findOne(@Args('id', { type: () => ID }) id: string)
   : Promise<Usuario> {
-    return this.servicioUsuarios.findOne(id);
+    return this.servicioUsuarios.findOneById(id);
   }
 
   

@@ -3,12 +3,16 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Usuario } from 'src/users/entities/user.entity';
+import { JwtPayloadContract } from '../interfaces/jwt-payload.interface';
+import { AuthService } from '../auth.service';
 
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 
   constructor(
+    //inyectar el servicio de autenticacion para extraer usuarios seguros
+    private readonly authService: AuthService,
     configService: ConfigService,
   ) {
     super({
@@ -18,8 +22,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any): Promise<Usuario>  {
+  // El payload debe tener cierto contrato de estructura
+  async validate(payload: JwtPayloadContract): Promise<Usuario>  {
     console.log(payload);
+
+    const {id} = payload;
+    const usuario = this.authService.validarUsuario(id);
+
     throw new UnauthorizedException("Trabajando en la validación del token");
   }
 }

@@ -5,6 +5,7 @@ import { AuthResponse } from './types/auth.response';
 import { ServicioUsuarios } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { Usuario } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -57,8 +58,20 @@ export class AuthService {
   }
   
 
-  //revalidacion de token
+  //revalidamos token cuando se refresca la pagina  / se cierra y se vuelve a abrir el navegador
   async revalidarToken(): Promise<string>{
     return "Validando Token de usuario..."
+  }
+
+
+  // Validamos usuario y contraseña
+  async validarUsuario(idUser: string): Promise<Usuario> {
+    const user = await this.servicioUsuarios.findOneById(idUser);
+
+    if(!user.active){
+      throw new Error (`Usuario ${user.email}, ${user.roles} no esta activo`);
+    }
+
+    return user;
   }
 }
