@@ -37,10 +37,10 @@
 
 # Hay dos maneras de correr la aplicación
 
-# 1. Con Docker:
+## ``1. Con Docker:``
 se levanta la base de datos y el servidor en un solo comando
 
-# 2. Con servicio AWS (RDS)
+## ``2. Con servicio AWS (RDS)``
 se levanta el servidor y se conecta a la base de datos en AWS
 
 # INSTRUCCIONES (1) CON DOCKER
