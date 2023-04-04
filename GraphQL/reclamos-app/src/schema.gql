@@ -13,6 +13,7 @@ type Reclamo {
 
 type Usuario {
   id: ID!
+  username: String!
   email: String!
   roles: [String!]!
   active: String!

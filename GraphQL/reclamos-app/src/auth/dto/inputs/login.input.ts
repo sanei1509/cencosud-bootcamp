@@ -11,7 +11,7 @@ export class LoginUsuarioInput {
 
   @Field()
   @IsNotEmpty()
-  email: string;
+  email?: string;
 
   @Field(() => String, {nullable: false})
   @IsNotEmpty()

@@ -10,6 +10,11 @@ export class Usuario {
   @IsUUID()
   id: string;
 
+  // username
+  @Field(() => String)
+  @Column({unique: true})
+  username: string;
+
   // email
   @Field(() => String)
   @Column({unique: true})

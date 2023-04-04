@@ -8,10 +8,11 @@ import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './guards/jwt-auth-guards';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Usuario } from 'src/users/entities/user.entity';
+import { RolesValidos } from './enums/roles-validos.enum';
 
 
-
-@Resolver(() => Auth)
+// Que tipo de dato vamos a retornar por lo general
+@Resolver(() => AuthResponse)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
@@ -30,7 +31,8 @@ export class AuthResolver {
   // Validación de Token
   @Query(() => AuthResponse, {name: "ValidoToken", description: "Validar Token de Usuario, Devuelve datos del usuario"})
   @UseGuards( JwtAuthGuard )
-  validoToken(@CurrentUser() usuario : Usuario): AuthResponse{
+  //solo los usuarios con rol admin pueden acceder a esta ruta
+  validoToken(@CurrentUser([RolesValidos.user]) usuario : Usuario): AuthResponse{
     console.log({usuario})
     return this.authService.validarToken(usuario);
 

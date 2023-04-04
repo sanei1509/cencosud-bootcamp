@@ -14,7 +14,15 @@
 * Hacer testing de la API (última a cosa a investigar personalmente)
 * Revisar la parte del bonus. (luego de terminar la parte de aplicar testing)
 
+# Hay dos maneras de correr la aplicación
 
+# 1. Con Docker:
+se levanta la base de datos y el servidor en un solo comando
+
+# 2. Con servicio AWS (RDS)
+se levanta el servidor y se conecta a la base de datos en AWS
+
+# INSTRUCCIONES (1) CON DOCKER
 ## Para poder desplegar en tu maquina local
 
 * Instalar ``NodeJS`` y ``Yarn``
@@ -32,7 +40,7 @@ git clone HTTPS_DEL_REPO
 yarn install
 ````
 
-* Crear archivo ``.env`` y copiar el contenido de ``.env-template``
+* Crear archivo ``.env`` y copiar el contenido de ``.env-template-postgres-docker``
 
 * Levantar la base de datos
  
@@ -48,8 +56,34 @@ docker-compose up -d
 yarn start:dev
 ````
 
+# INSTRUCCIONES (2) CON SERVICIO AWS (RDS)
+
+## Para poder desplegar en tu maquina local
+
+* Instalar ``NodeJS`` y ``Yarn``
+
+* Clonar el repositorio
+
+````
+git clone HTTPS_DEL_REPO
+````
+* Instalar las dependencias
+
+````
+yarn install
+````
+* Crear archivo ``.env`` y copiar el contenido de ``.env-template-postgres-aws``
+
+
+* Levantar el servidor
+``directorio``: parado en ``/reclamos-app``
+````
+yarn start:dev
+````
+
 * Abrir el navegador en ``http://localhost:3000/graphql``
 * Para ver la documentación de la API, ir a ``http://localhost:3000/graphql``
+
 
 ## Requerimientos
 
@@ -79,160 +113,6 @@ Acciones CRUD para la entidad Reclamo
   "problematica": "El producto no funciona",
 }
 ```
-
-## Entidad Reclamo
-
-```ts
-@Entity()
-export class Reclamo {
-  @PrimaryGeneratedColumn()
-  idReclamo: number;
-
-  @Column()
-  descripcion: string;
-
-  @Column()
-  detalleCompra: {
-    formatoCSV: string;
-    fechaCompra: string;
-    nroFactura: string;
-    codigoProducto: string;
-  };
-
-  @Column()
-  problematica: string;
-}
-```
-
-## Testing de la API
-
-1. Crear reclamo
-
-```graphql
-
-mutation {
-  createReclamo(
-    input: {
-      descripcion: "El producto no funciona"
-      detalleCompra: {
-        formatoCSV: "idProducto, cantidad, precioUnitario, precioTotal"
-        fechaCompra: "2020-01-01"
-        nroFactura: "123456"
-        codigoProducto: "123456"
-      }
-      problematica: "El producto no funciona"
-    }
-  ) {
-    idReclamo
-    descripcion
-    detalleCompra {
-      formatoCSV
-      fechaCompra
-      nroFactura
-      codigoProducto
-    }
-    problematica
-  }
-}
-```
-
-2. Leer reclamo
-
-```graphql
-
-query {
-  reclamo(idReclamo: 1) {
-    idReclamo
-    descripcion
-    detalleCompra {
-      formatoCSV
-      fechaCompra
-      nroFactura
-      codigoProducto
-    }
-    problematica
-  }
-}
-```
-
-3. Actualizar reclamo
-
-```graphql
-
-
-mutation {
-  updateReclamo(
-    idReclamo: 1
-    input: {
-      descripcion: "El producto no funciona"
-      detalleCompra: {
-        formatoCSV: "idProducto, cantidad, precioUnitario, precioTotal"
-        fechaCompra: "2020-01-01"
-        nroFactura: "123456"
-        codigoProducto: "123456"
-      }
-      problematica: "El producto no funciona"
-    }
-  ) {
-    idReclamo
-    descripcion
-    detalleCompra {
-      formatoCSV
-      fechaCompra
-      nroFactura
-      codigoProducto
-    }
-    problematica
-  }
-}
-```
-
-
-4. Borrar reclamo
-
-```graphql
-
-mutation {
-  deleteReclamo(idReclamo: 1) {
-    idReclamo
-    descripcion
-    detalleCompra {
-      formatoCSV
-      fechaCompra
-      nroFactura
-      codigoProducto
-    }
-    problematica
-  }
-}
-```
-
-5. Paginación
-
-```graphql
-
-query {
-  reclamos(pagination: { page: 1, limit: 10 }) {
-    data {
-      idReclamo
-      descripcion
-      detalleCompra {
-        formatoCSV
-        fechaCompra
-        nroFactura
-        codigoProducto
-      }
-      problematica
-    }
-    pagination {
-      page
-      limit
-      total
-    }
-  }
-}
-```
-
 # Paso a paso para crear el proyecto
 
 ## Instalar NestJS
