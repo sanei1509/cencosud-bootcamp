@@ -1,6 +1,27 @@
 # Proyecto individual entregable
 ``fecha de entrega:`` 15 de abril
 
+## Tecnologias utilizadas en el proyecto
+
+![NestJS](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![GraphQL](https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Podman](https://img.shields.io/badge/Podman-8C8C8C?style=for-the-badge&logo=podman&logoColor=white)
+![TablePlus](https://img.shields.io/badge/TablePlus-1E1E1E?style=for-the-badge&logo=tableplus&logoColor=white)
+![Apollo](https://img.shields.io/badge/Apollo-311C87?style=for-the-badge&logo=apollo-graphql&logoColor=white)
+
+* ``NestJS``: Framework de NodeJS
+* ``GraphQL``: Lenguaje de consulta para APIs
+* ``TypeORM``: ORM para NodeJS
+* ``PostgreSQL``: Base de datos
+* ``Docker``: Contenedores
+* ``Docker Compose``: Orquestador de contenedores
+* ``AWS``: Servicios de la nube
+* ``Terraform``: Automatización de aprovisionamiento
 
 ## Letra 
 
