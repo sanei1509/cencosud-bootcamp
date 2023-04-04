@@ -104,12 +104,7 @@ Acciones CRUD para la entidad Reclamo
 {
   "idReclamo": 1,
   "descripcion": "El producto no funciona",
-  "detalleCompra": {
-    "formatoCSV": "idProducto, cantidad, precioUnitario, precioTotal",
-    "fechaCompra": "2020-01-01",
-    "nroFactura": "123456",
-    "codigoProducto": "123456",
-  },
+  "detalleCompra": "fechaCompra, nroFactura, codigoProducto", //Solicitado de 3 inputs distintos
   "problematica": "El producto no funciona",
 }
 ```
