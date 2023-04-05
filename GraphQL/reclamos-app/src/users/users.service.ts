@@ -18,7 +18,7 @@ export class ServicioUsuarios {
     private readonly repositorioUsuarios: Repository<Usuario>
   ){}
 
-  // Creacion / Registro de usuario
+  //  Metodo Creacion / Registro de usuario
   async create(registroUsuarioInput: RegistroUsuarioInput) {
     try{
       // create crea una instancia de la entidad pero no la guarda en la base de datos
@@ -34,12 +34,14 @@ export class ServicioUsuarios {
     }
   }
 
+  // METODO : listar todos los usuarios
   async findAll(): Promise<Usuario[]> {
     // buscamos todos los usuarios
     const usuarios = await this.repositorioUsuarios.find();
     return usuarios;
   }
 
+  // METODO : Buscar usuario por id
   async findOneById(id: string): Promise<Usuario> {
     try{
       const user = await this.repositorioUsuarios.findOne({where: {id}});
@@ -52,7 +54,7 @@ export class ServicioUsuarios {
     }
   }
 
-
+  //METODO : Buscar usuario por email
   async findOneByEmail(email: string): Promise<Usuario> {
     //buscamos todos los usuarios
     const usuarios = await this.findAll();
@@ -69,8 +71,9 @@ export class ServicioUsuarios {
 
 }
 
-  update(id: string, updateUserInput: ActualizarUsuarioInput): string {
-    return `This action updates a #${id} user`;
+  // METODO : actualizarUsuario
+  async update(id: string, updateUserInput: ActualizarUsuarioInput): Promise<Usuario> {
+    throw new Error("Metodo sin implementar aún")
   }
 
   remove(id: string): string {
@@ -78,11 +81,21 @@ export class ServicioUsuarios {
     return `This action removes a #${id} user`;
   }
 
-  async block(id): Promise<Usuario> {
-    throw new Error("Metodo no implementado aun")
+  // METODO : Baja lógica de usuario.
+  async bloqueoDeUsuarios(id: string, usuarioAdmin: Usuario): Promise<Usuario> {
+    const usuarioABloquear = await this.findOneById(id);
+
+    if (usuarioABloquear) {
+      usuarioABloquear.active = false;
+      usuarioABloquear.ultimaModificacion = usuarioAdmin;
+      //persistimos el nuevo usuario en la base de datos y retornamos el usuario creado
+      return await this.repositorioUsuarios.save(usuarioABloquear);
+    }
+
+    return usuarioABloquear;
   }
 
-  // Manejador de errores de la base de datos
+  // HANDLE ERRORS
   private manejarErrores(error: any): never{
     this.logger.error(error);
 

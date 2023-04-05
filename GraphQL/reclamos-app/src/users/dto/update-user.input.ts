@@ -1,8 +1,27 @@
+import { IsEmail, IsNotEmpty, IsOptional, IsUUID, MinLength } from 'class-validator';
 import { CrearUsuarioInput } from './create-user.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, Int, PartialType, ID } from '@nestjs/graphql';
+import { RolesValidos } from 'src/auth/enums/roles-validos.enum';
 
 @InputType()
 export class ActualizarUsuarioInput extends PartialType(CrearUsuarioInput) {
-  @Field(() => Int)
-  id: number;
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+
+  @Field(() => String, {nullable: true})
+  @IsEmail()
+  @IsNotEmpty()
+  @IsOptional()
+  email?: string;
+
+  @Field(() => String, {nullable: true})
+  @IsOptional()
+  @IsNotEmpty()
+  @MinLength(6)
+  password?: string;
+
+  roles?: RolesValidos[];
+
+  isActive?: boolean;
 }

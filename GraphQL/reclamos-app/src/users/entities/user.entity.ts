@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { IsEmail, IsUUID } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity("usuarios")
 @ObjectType()
@@ -46,4 +46,11 @@ export class Usuario {
   // relacion con sus tickets de reclamos
   // @Field(() => [Reclamo])
   // @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
+
+
+  // Ultima modificacion de roles
+  @Field(() => Usuario, {nullable: true})
+  @JoinColumn({name: 'ultima_modificacion'})
+  @ManyToOne(() => Usuario, (usuario) => usuario.ultimaModificacion, {nullable: true, lazy: true})
+  ultimaModificacion?: Usuario;
 }

@@ -17,6 +17,7 @@ type Usuario {
   email: String!
   roles: [String!]!
   active: String!
+  ultimaModificacion: Usuario
 }
 
 type AuthResponse {
@@ -52,8 +53,9 @@ type Mutation {
 
   """Borrar un ticket de reclamo existente de DB"""
   EliminarReclamoFisicamente(id: ID!): Reclamo!
-  removeUsuario(id: ID!): Usuario!
-  BlockUser(id: ID!): Usuario!
+  ActualizarUsuario(infoActualizar: ActualizarUsuarioInput!): Usuario!
+  EliminarUsuario(id: ID!): Usuario!
+  BajaDeUsuario(id: ID!): Usuario!
 
   """Registro de Usuario en la base de datos, Generar Auth Token"""
   Register(registroUsuarioInput: RegistroUsuarioInput!): AuthResponse!
@@ -84,6 +86,13 @@ input ActualizarReclamoInput {
   problema: String
 
   """id del reclamo"""
+  id: ID!
+}
+
+input ActualizarUsuarioInput {
+  username: String
+  email: String
+  password: String
   id: ID!
 }
 
