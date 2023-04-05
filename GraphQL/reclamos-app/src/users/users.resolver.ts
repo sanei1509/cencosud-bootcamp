@@ -3,9 +3,10 @@ import { ServicioUsuarios } from './users.service';
 import { Usuario } from './entities/user.entity';
 import { CrearUsuarioInput } from './dto/create-user.input';
 import { ActualizarUsuarioInput } from './dto/update-user.input';
-import { ParseUUIDPipe } from '@nestjs/common';
+import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { RolesValidos } from 'src/auth/enums/roles-validos.enum';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
 
 @Resolver(() => Usuario)
 export class UsuariosResolver {
@@ -24,8 +25,8 @@ export class UsuariosResolver {
 
   // Actualizacion/modificacion de usuario
   @Mutation(() => Usuario, { name: 'ActualizarUsuario'})
-  async updateUser(@Args('infoActualizar') actualizarUsuarioInput: ActualizarUsuarioInput) {
-    return this.servicioUsuarios.update(actualizarUsuarioInput.id, actualizarUsuarioInput);
+  async updateUser(@Args('actualizarUsuarioInput') actualizarUsuarioInput: ActualizarUsuarioInput, @CurrentUser([RolesValidos.admin]) usuario: Usuario) { 
+    return this.servicioUsuarios.update(actualizarUsuarioInput.id, actualizarUsuarioInput, usuario);
   }
 
   // Eliminado permanente

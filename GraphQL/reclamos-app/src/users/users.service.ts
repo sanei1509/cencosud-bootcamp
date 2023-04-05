@@ -72,8 +72,23 @@ export class ServicioUsuarios {
 }
 
   // METODO : actualizarUsuario
-  async update(id: string, updateUserInput: ActualizarUsuarioInput): Promise<Usuario> {
-    throw new Error("Metodo sin implementar aún")
+  async update(id: string, updateUserInput: ActualizarUsuarioInput, usuarioQueActualiza: Usuario): Promise<Usuario> {
+    try {
+        // vamos a usar el preload para evitar que se cree un nuevo usuario
+        // y se cree una nueva relacion con el usuario
+        const usuarioActualizado = this.repositorioUsuarios.preload({
+          ...updateUserInput,
+          id
+        });
+
+        //uso el await porque el preload retorna una promesa
+        // (await usuarioActualizado).ultimaModificacion = usuarioQueActualiza;
+
+        return usuarioActualizado;
+   }
+    catch(error){
+      this.manejarErrores(error)
+    }
   }
 
   remove(id: string): string {

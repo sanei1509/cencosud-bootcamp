@@ -1,6 +1,8 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { IsEmail, IsUUID } from 'class-validator';
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { RolesValidos } from 'src/auth/enums/roles-validos.enum';
+import { Reclamo } from 'src/reclamos/entity/reclamo.entity';
+import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity("usuarios")
 @ObjectType()
@@ -31,9 +33,9 @@ export class Usuario {
   @Column({
     type: 'text',
     array: true,
-    default: ['USER']
+    default: ["USER"]
   })
-  roles: string[];
+  roles: RolesValidos[];
 
   // estado // ACTIVE
   @Field(() => String)
@@ -44,13 +46,15 @@ export class Usuario {
   active: boolean;
 
   // relacion con sus tickets de reclamos
-  // @Field(() => [Reclamo])
-  // @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
-
+  @Field(() => [Reclamo])
+  @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
+  reclamos: Reclamo[];
 
   // Ultima modificacion de roles
   @Field(() => Usuario, {nullable: true})
   @JoinColumn({name: 'ultima_modificacion'})
+  @Index('userId-index')
   @ManyToOne(() => Usuario, (usuario) => usuario.ultimaModificacion, {nullable: true, lazy: true})
   ultimaModificacion?: Usuario;
+
 }

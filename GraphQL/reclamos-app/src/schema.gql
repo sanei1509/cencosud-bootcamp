@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Usuario {
+  id: ID!
+  username: String!
+  email: String!
+  roles: [String!]!
+  active: String!
+  reclamos: [Reclamo!]!
+  ultimaModificacion: Usuario
+}
+
 type Reclamo {
   id: ID!
   nroReclamo: Int!
@@ -9,15 +19,7 @@ type Reclamo {
   detalleDeCompra: String!
   problema: String!
   activo: Boolean!
-}
-
-type Usuario {
-  id: ID!
-  username: String!
-  email: String!
-  roles: [String!]!
-  active: String!
-  ultimaModificacion: Usuario
+  usuario: Usuario!
 }
 
 type AuthResponse {
@@ -53,7 +55,7 @@ type Mutation {
 
   """Borrar un ticket de reclamo existente de DB"""
   EliminarReclamoFisicamente(id: ID!): Reclamo!
-  ActualizarUsuario(infoActualizar: ActualizarUsuarioInput!): Usuario!
+  ActualizarUsuario(actualizarUsuarioInput: ActualizarUsuarioInput!): Usuario!
   EliminarUsuario(id: ID!): Usuario!
   BajaDeUsuario(id: ID!): Usuario!
 
@@ -94,6 +96,8 @@ input ActualizarUsuarioInput {
   email: String
   password: String
   id: ID!
+  roles: [String!]
+  isActive: Boolean
 }
 
 input RegistroUsuarioInput {

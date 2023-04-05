@@ -1,6 +1,7 @@
 import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
 import { IsPositive } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "src/users/entities/user.entity";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 //Que es un objectType()?
@@ -45,9 +46,10 @@ export class Reclamo {
     @Column({default: true})
     activo: boolean;
 
-    // relacion al usuario
-    // @Field(() => Usuario)
-    // usuario: Usuario;
+    // Relacion con los usuarios
+    @Field( () => Usuario )
+    @ManyToOne( () => Usuario /* tipo con el que se relaciona*/, (usuario) => usuario.reclamos /*De que manera se va a relacionar*/, {nullable: false, eager: true})
+    usuario: Usuario;
 
     //relacion al producto
     // @Field(() => Producto)

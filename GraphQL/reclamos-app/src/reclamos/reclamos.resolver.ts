@@ -6,10 +6,14 @@ import { Reclamo } from './entity/reclamo.entity';
 import { CrearReclamoInput, ActualizarReclamoInput} from './dto/inputs'; 
 import { ReclamosService } from './reclamos.service';
 import { IsUUID } from 'class-validator';
-import { ParseUUIDPipe } from '@nestjs/common';
+import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { Usuario } from 'src/users/entities/user.entity';
 
 // Nuestro resolver va a responder todo lo relacionado a los RECLAMOS (tickets)
 @Resolver(() => Reclamo)
+@UseGuards(JwtAuthGuard)
 export class ReclamosResolver {
     // Inyeccion del servicio
     constructor(
@@ -35,7 +39,9 @@ export class ReclamosResolver {
     @Mutation(() => Reclamo, {name: "CrearReclamo", description: "Crear un nuevo ticket de reclamo"}) 
     async createReclamo(
         @Args('crearReclamoInput') crearReclamoInput: CrearReclamoInput,
+        @CurrentUser() usuario: Usuario
     ):  Promise<Reclamo> {
+        console.log(usuario)
         return this.reclamosService.create(crearReclamoInput);
     }
 
