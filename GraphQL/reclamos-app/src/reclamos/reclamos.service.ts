@@ -5,6 +5,7 @@ import { Reclamo } from './entity/reclamo.entity';
 import { CrearReclamoInput, ActualizarReclamoInput } from './dto/inputs';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Usuario } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class ReclamosService {
@@ -68,8 +69,8 @@ export class ReclamosService {
     }
 
     // Crear un reclamo
-    async create(crearReclamoInput: CrearReclamoInput ): Promise<Reclamo>{
-        const nuevoReclamo = this.reclamosRepository.create(crearReclamoInput);
+    async create(crearReclamoInput: CrearReclamoInput, usuarioDelTicket: Usuario ): Promise<Reclamo>{
+        const nuevoReclamo = this.reclamosRepository.create({...crearReclamoInput, usuario: usuarioDelTicket});
         // Persistencia de datos
         await this.reclamosRepository.save(nuevoReclamo);
         console.log(nuevoReclamo);

@@ -8,8 +8,8 @@ type Usuario {
   email: String!
   roles: [String!]!
   active: String!
-  reclamos: [Reclamo!]!
   ultimaModificacion: Usuario
+  reclamos: [Reclamo!]!
 }
 
 type Reclamo {

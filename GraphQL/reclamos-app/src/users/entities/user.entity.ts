@@ -45,10 +45,6 @@ export class Usuario {
   })
   active: boolean;
 
-  // relacion con sus tickets de reclamos
-  @Field(() => [Reclamo])
-  @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
-  reclamos: Reclamo[];
 
   // Ultima modificacion de roles
   @Field(() => Usuario, {nullable: true})
@@ -57,4 +53,10 @@ export class Usuario {
   @ManyToOne(() => Usuario, (usuario) => usuario.ultimaModificacion, {nullable: true, lazy: true})
   ultimaModificacion?: Usuario;
 
+
+  // relacion con sus tickets de reclamos
+  @Field(() => [Reclamo])
+  @OneToMany(() => Reclamo, (reclamo) => reclamo.usuario)
+  reclamos: Reclamo[];
+  
 }

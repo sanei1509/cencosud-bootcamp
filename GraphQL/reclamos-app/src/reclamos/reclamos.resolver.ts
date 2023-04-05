@@ -41,8 +41,7 @@ export class ReclamosResolver {
         @Args('crearReclamoInput') crearReclamoInput: CrearReclamoInput,
         @CurrentUser() usuario: Usuario
     ):  Promise<Reclamo> {
-        console.log(usuario)
-        return this.reclamosService.create(crearReclamoInput);
+        return this.reclamosService.create(crearReclamoInput, usuario);
     }
 
     // Actualizar un reclamo por id
