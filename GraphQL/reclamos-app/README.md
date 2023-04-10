@@ -231,11 +231,17 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
  - Si la persona es ADMIN, puede ver los reclamos, crear reclamos y borrar reclamos.
 
- 
-
 Además de la encriptación de contraseñas.
 
+- Cada usuario con su token deberia poder ver sus reclamos. pero no todo de la base de datos.
 
+## Al contar con autorizacion
+
+En las operaciones que se necesitan un usuario con cierta cuenta, en la interfaz de `` apollo `` se necesita que se agregue un header con lo siguiente.
+
+Como se muestra en la imagen siguiente:
+
+<img src="https://i.imgur.com/0Z7ZQ9M.png" width="500" height="300">
 
 # Autor
 

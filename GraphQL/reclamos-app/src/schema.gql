@@ -31,6 +31,9 @@ type Query {
   """Listar todos los tickets de reclamos DB"""
   ListarReclamos: [Reclamo!]!
 
+  """Listar todos los tickets de reclamos de un usuario"""
+  ListarReclamosUsuario: [Reclamo!]!
+
   """Listar un ticket solicitado por app"""
   SolicitarReclamoID(id: ID!): Reclamo!
 

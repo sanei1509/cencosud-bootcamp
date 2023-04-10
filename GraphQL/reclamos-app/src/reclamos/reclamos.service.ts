@@ -42,7 +42,7 @@ export class ReclamosService {
     //     }
     // ]
 
-    // Traer todos los reclamos, arreglo de reclamos
+    // Traer todos los reclamos de la base de datos, arreglo de reclamos
     // Filtro : si recibimos titulo especificado se aplica el filtro
     getAllReclamos(titulo? : tituloArgsFilter): Promise<Reclamo[]>{
         // TODO: /filtrar titulo /paginar
@@ -56,6 +56,25 @@ export class ReclamosService {
         //Si no recibimos titulo, devuelvo el arreglo de reclamos
         return this.reclamosRepository.find();
     }
+
+    // Traer reclamos filtrados por usuario propietario
+    async getReclamosByUser(usuario: Usuario): Promise<Reclamo[]>{
+        // Si el usuario no tiene reclamos, devuelvo un arreg1lo vacio
+        const reclamos = await this.reclamosRepository.find(
+            {where: {
+                // el usuario condicion tiene que coincidir con el usuario que esta actuando
+                usuario: {
+                    //necesito que el usuario tenga el id para buscar los reclamos
+                    id: usuario.id
+                }
+            }}
+        );
+        if (reclamos.length === 0)
+            return [];
+        else
+            return reclamos;
+    }
+
 
     async getReclamoById(id: string): Promise<Reclamo>{
         //Si el reclamo no existe, devuelvo null

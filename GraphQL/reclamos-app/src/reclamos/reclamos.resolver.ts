@@ -28,6 +28,14 @@ export class ReclamosResolver {
         return this.reclamosService.getAllReclamos();
     }
 
+    // Traer todos los reclamos de un usuario, arreglo de reclamos
+    @Query(() => [Reclamo], {name: "ListarReclamosUsuario", description: "Listar todos los tickets de reclamos de un usuario"})
+    async getReclamosByUser(@CurrentUser() usuario: Usuario): Promise<Reclamo[]> {
+        //devuelvo el arreglo de reclamos
+        return this.reclamosService.getReclamosByUser(usuario);
+    }
+
+
     // Traer un reclamo por id
     @Query(() => Reclamo, {name: "SolicitarReclamoID", description: "Listar un ticket solicitado por app"})
     async getReclamoById(@Args('id', {type: () => ID}, ParseUUIDPipe)id: string
