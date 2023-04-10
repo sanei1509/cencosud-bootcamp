@@ -237,7 +237,7 @@ Además de la encriptación de contraseñas.
 
 ## Al contar con autorizacion
 
-En las operaciones que se necesitan un usuario con cierta cuenta, en la interfaz de `` apollo `` se necesita que se agregue un header con lo siguiente.
+En las operaciones que se necesitan un usuario con cierta cuenta, en la interfaz de `` apollo `` se necesita que se agregue un header con cierta información.
 
 Como se muestra en la imagen siguiente:
 
