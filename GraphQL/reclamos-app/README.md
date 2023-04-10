@@ -241,7 +241,7 @@ En las operaciones que se necesitan un usuario con cierta cuenta, en la interfaz
 
 Como se muestra en la imagen siguiente:
 
-<img src="https://i.imgur.com/0Z7ZQ9M.png" width="500" height="300">
+<img src="letra/auth-img-instruction.png" width="500" height="300">
 
 # Autor
 
