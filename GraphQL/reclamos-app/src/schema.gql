@@ -34,6 +34,9 @@ type Query {
   """Listar todos los tickets de reclamos de un usuario"""
   ListarReclamosUsuario: [Reclamo!]!
 
+  """Listar un ticket solicitado por app de usuario logueado"""
+  BuscarReclamoUsuario(id: ID!): Reclamo!
+
   """Listar un ticket solicitado por app"""
   SolicitarReclamoID(id: ID!): Reclamo!
 
@@ -73,8 +76,17 @@ input CrearReclamoInput {
   """titulo del reclamo"""
   titulo: String!
 
-  """detalle de compra del reclamo"""
-  detalleDeCompra: String!
+  """marca del producto"""
+  marca: String!
+
+  """numero de la factura"""
+  numeroFactura: String!
+
+  """codigo del producto"""
+  codigoProducto: String!
+
+  """fecha de compra del producto"""
+  fechaCompra: String!
 
   """problema del reclamo"""
   problema: String!
@@ -84,8 +96,17 @@ input ActualizarReclamoInput {
   """titulo del reclamo"""
   titulo: String
 
-  """detalle de compra del reclamo"""
-  detalleDeCompra: String
+  """marca del producto"""
+  marca: String
+
+  """numero de la factura"""
+  numeroFactura: String
+
+  """codigo del producto"""
+  codigoProducto: String
+
+  """fecha de compra del producto"""
+  fechaCompra: String
 
   """problema del reclamo"""
   problema: String

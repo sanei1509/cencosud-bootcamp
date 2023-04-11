@@ -35,6 +35,22 @@
 * Hacer testing de la API (última a cosa a investigar personalmente)
 * Revisar la parte del bonus. (luego de terminar la parte de aplicar testing)
 
+# Repositorios
+
+Todo mi resolución por historial de commits se encuentra en la siguiente ruta de mi repositorio:
+````
+sanei1509/cencosud-bootcamp/Graphql/reclamos app
+````
+
+### ``URL``
+* [Repositorio](https://github.com/sanei1509/cencosud-bootcamp/tree/master/GraphQL/reclamos-app)
+
+## Para que un tercero (usted) pueda clonarlo tuve que crear un un repositiorio individual
+
+### ``URL``
+* [Repositorio](https://github.com/sanei1509/reclamos-app)
+
+
 # Hay dos maneras de correr la aplicación
 
 ## ``1. Con Docker:``
@@ -224,24 +240,52 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
 2. Crear un sistema de LOGIN.
 
-### REGLAS DE LA APP
- - Si la persona no esta logueada, solo puede ver los reclamos.
+### Reglas/logica de la aplicación
 
- - Si la persona esta logueada, puede ver los reclamos y crear reclamos.
+ - Si la persona ``no esta logueada``, no puede hacer ninguna petición.
 
- - Si la persona es ADMIN, puede ver los reclamos, crear reclamos y borrar reclamos.
+ - Si la persona ``esta logueada``, puede ver sus reclamos y crear reclamos.
 
-Además de la encriptación de contraseñas.
+ - Si la persona es ``ADMIN``, puede ver los reclamos (DB), ``crear`` reclamos y ``borrar`` reclamos, ``actualizar``.
 
-- Cada usuario con su token deberia poder ver sus reclamos. pero no todo de la base de datos.
+- Cada usuario ``USER`` con su token podrá ver sus reclamos. pero no todo de la base de datos.
+
+- Cada usuario ``ADMIN`` con su token debería poder ver todos los reclamos de la base de datos además de los suyos. 
 
 ## Al contar con autorizacion
 
-En las operaciones que se necesitan un usuario con cierta cuenta, en la interfaz de `` apollo `` se necesita que se agregue un header con cierta información.
+Primero recordemos como mencionamos anteriormente que para comunicarnos con la aplicación utilizaríamos la interfaz de apollo que nos crea no solo la interfaz gráfica, sino una pequeña documentación de la API.
+
+
+## Aqui puede visualizar todas las operaciones de  la app y cierta descripción de cada una.
+
+dividido en 2 partes:
+
+``Query``: operaciones de lectura
+
+``Mutation``: operaciones de escritura
+
+<img src="letra/doc-apollo.png" width="500" height="300">
+
+
+
+
+
+## Para poder acceder a las operaciones de la API, necesitamos un token de autenticación.
 
 Como se muestra en la imagen siguiente:
 
 <img src="letra/auth-img-instruction.png" width="500" height="300">
+
+## Mi intención:
+
+### OPERACIONES ADMIN
+Quize crear operaciones para usuarios ADMIN que son consultas generales en la base de datos
+
+### OPERACIONES USER
+Crear operaciones para usuarios que son consultas especificas de ese usuario que esta utilizando la aplicación en particular.
+
+
 
 # Autor
 

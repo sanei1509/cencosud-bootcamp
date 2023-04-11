@@ -75,6 +75,19 @@ export class ReclamosService {
             return reclamos;
     }
 
+    async getReclamoByUser(id: string , usuario: Usuario): Promise<Reclamo> {
+        const reclamo = await this.reclamosRepository.findOneBy({
+            id,
+            usuario: {
+                id: usuario.id
+            }
+        });
+
+        if (!reclamo)
+            throw new NotFoundException(`Reclamo con ID ${id}, no encontrado en tu cuenta`);
+
+        return reclamo;
+    }
 
     async getReclamoById(id: string): Promise<Reclamo>{
         //Si el reclamo no existe, devuelvo null
@@ -89,7 +102,11 @@ export class ReclamosService {
 
     // Crear un reclamo
     async create(crearReclamoInput: CrearReclamoInput, usuarioDelTicket: Usuario ): Promise<Reclamo>{
-        const nuevoReclamo = this.reclamosRepository.create({...crearReclamoInput, usuario: usuarioDelTicket});
+        // Creo formato de mi detalle de compra
+        const detalleDeCompraCSV = crearReclamoInput.codigoProducto + "," + crearReclamoInput.marca + "," + crearReclamoInput.fechaCompra + "," + crearReclamoInput.numeroFactura; 
+
+        // Intercepto el reclamo para dar forma a mi detalle de compra y lo guardo en la base de datos
+        const nuevoReclamo = this.reclamosRepository.create({...crearReclamoInput, usuario: usuarioDelTicket, detalleDeCompra: detalleDeCompraCSV});
         // Persistencia de datos
         await this.reclamosRepository.save(nuevoReclamo);
         console.log(nuevoReclamo);
@@ -106,7 +123,7 @@ export class ReclamosService {
 
         //Actualizamos los datos del reclamo si llegan
         reclamo.titulo = actualizarReclamoInput.titulo ? actualizarReclamoInput.titulo : reclamo.titulo;
-        reclamo.detalleDeCompra = actualizarReclamoInput.detalleDeCompra ? actualizarReclamoInput.detalleDeCompra : reclamo.detalleDeCompra;
+        // reclamo.detalleDeCompra = actualizarReclamoInput.detalleDeCompra ? actualizarReclamoInput.detalleDeCompra : reclamo.detalleDeCompra;
         reclamo.problema = actualizarReclamoInput.problema ? actualizarReclamoInput.problema : reclamo.problema;
 
 

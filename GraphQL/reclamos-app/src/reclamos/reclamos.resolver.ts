@@ -21,22 +21,30 @@ export class ReclamosResolver {
         // private readonly usuariosService: UsuariosService
     ) {}
 
-    // Traer todos los reclamos, arreglo de reclamos
+    // ADMIN Traer todos los reclamos, arreglo de reclamos
     @Query(() => [Reclamo], {name: "ListarReclamos", description: "Listar todos los tickets de reclamos DB"})
     async getAllReclamos(): Promise<Reclamo[]> {
         //devuelvo el arreglo de reclamos
         return this.reclamosService.getAllReclamos();
     }
 
-    // Traer todos los reclamos de un usuario, arreglo de reclamos
+    // USER Traer todos los reclamos de un usuario, arreglo de reclamos
     @Query(() => [Reclamo], {name: "ListarReclamosUsuario", description: "Listar todos los tickets de reclamos de un usuario"})
     async getReclamosByUser(@CurrentUser() usuario: Usuario): Promise<Reclamo[]> {
         //devuelvo el arreglo de reclamos
         return this.reclamosService.getReclamosByUser(usuario);
     }
 
+    // USER traer un reclamo correspondiente al usuario no otros.
+    @Query(() => Reclamo, {name: "BuscarReclamoUsuario", description: "Listar un ticket solicitado por app de usuario logueado"})
+    async getReclamoByUser(
+        @Args('id', {type: () => ID}, ParseUUIDPipe)id: string,
+        @CurrentUser() usuario: Usuario
+    ): Promise<Reclamo>{
+        return this.reclamosService.getReclamoByUser(id, usuario);
+    }
 
-    // Traer un reclamo por id
+    //ADMIN Traer un reclamo por id / DE cualquier usuario
     @Query(() => Reclamo, {name: "SolicitarReclamoID", description: "Listar un ticket solicitado por app"})
     async getReclamoById(@Args('id', {type: () => ID}, ParseUUIDPipe)id: string
     ): Promise<Reclamo>{
