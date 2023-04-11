@@ -134,7 +134,6 @@ Acciones CRUD para la entidad Reclamo
 - obtener una lista de reclamos filtrados por palabra clave. (descripcion, problematica)
 
 
-
 ## Modelo de reclamos
 
 ```json
@@ -188,7 +187,9 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
 1. Crear una sistema de REGISTRO.
 
-2. Crear un sistema de LOGIN.
+2. Crear un sistema de LOGIN: que nos devuelva un token.
+
+3. Crear un sistema de AUTORIZACION: que nos permita acceder a los recursos.
 
 ### Reglas/logica de la aplicación
 
@@ -196,7 +197,7 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
  - Si la persona ``esta logueada``, puede ver sus reclamos y crear reclamos.
 
- - Si la persona es ``ADMIN``, puede ver los reclamos (DB), ``crear`` reclamos y ``borrar`` reclamos, ``actualizar``.
+ - Si la persona es ``ADMIN``, puede ver los reclamos (DB), ``crear`` / ``actualizar`` / ``borrar`` reclamos.
 
 - Cada usuario ``USER`` con su token podrá ver sus reclamos. pero no todo de la base de datos.
 
