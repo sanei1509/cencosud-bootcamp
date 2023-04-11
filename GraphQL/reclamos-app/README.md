@@ -177,7 +177,7 @@ GRAPHQL: solicitamos solo lo que necesitamos,  una petición personalizada.
 para asegurarnos de no guardar datos no deseados en nuestra base de datos vamos a intentar abarcar lo mejor posible las validaciones de datos.
 
 
-### Autorización y Autenticación
+# Autorización y Autenticación
 
 ``Autorización``: es la capacidad de un usuario para acceder a un recurso.
 
@@ -191,7 +191,7 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
 3. Crear un sistema de AUTORIZACION: que nos permita acceder a los recursos.
 
-## Reglas/logica de la aplicación
+# Reglas   &   Lógica de la aplicación
 
  - Si la persona ``no esta logueada``, no puede hacer ninguna petición.
 
