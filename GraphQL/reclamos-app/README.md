@@ -227,7 +227,7 @@ dividido en 2 partes:
 
 Como se muestra en la imagen siguiente:
 
-<img src="letra/auth-img-instruction.png" width="500" height="300">
+<img src="letra/auth-img-instruction.png" width="700" height="500">
 
 ## Mi intención:
 
