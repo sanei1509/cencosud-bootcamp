@@ -145,18 +145,7 @@ Acciones CRUD para la entidad Reclamo
   "problematica": "El producto no funciona",
 }
 ```
-# Paso a paso para crear el proyecto
-
-## Instalar NestJS
-
-## Crear proyecto con NestJS
-
-## Instalar graphql en el proyecto, express and apolo
-
-````
-yarn add @nestjs/graphql @nestjs/apollo @apollo/server graphql
-
-````
+# Decisiones para crear el proyecto
 
 ## Tenemos 2 opciones utilizar ``SCHEMA FIRST`` O ``CODE FIRST``
  - [Schema First](https://docs.nestjs.com/graphql/quick-start#schema-first)
@@ -168,20 +157,15 @@ yarn add @nestjs/graphql @nestjs/apollo @apollo/server graphql
 
 ## Todos los servidores que se ejecutan con GraphQL necesitan al menos tener un ``RESOLVER`` que ejecute una ``QUERY`` o ``MUTATION``.
 
-## Crear un resolver
+## En nuestro caso vamos a tener 3 resolvers
 
-```ts
-import { Resolver, Query } from '@nestjs/graphql';
+1. Resolver para ``Reclamo``
 
-@Resolver()
-export class AppResolver {
-  @Query(() => String)
-  getHello(): string {
-    return 'Hello World!';
-  }
-}
-```
+2. Resolver para ``Usuario``
 
+3. Resolver para ``Auth``
+
+Nos vamos a comunicar con los usuarios a atraves de ``Auth`` para que recién puedan regitstrarse/loguearse y crear reclamos.
 
 ## Diferencia entre REST y GraphQL
 
@@ -193,40 +177,6 @@ GRAPHQL: solicitamos solo lo que necesitamos,  una petición personalizada.
 ## Validaciones de datos ingresados
 para asegurarnos de no guardar datos no deseados en nuestra base de datos vamos a intentar abarcar lo mejor posible las validaciones de datos.
 
-## Instalar class-validator
-
-````
-yarn add class-validator class-transformer
-````
-
-## Instalar TypeORM
-
-````
-yarn add @nestjs/typeorm typeorm
-````
-## Crear la entidad Reclamo
-
-```ts
-@Entity()
-export class Reclamo {
-  @PrimaryGeneratedColumn()
-  idReclamo: number;
-
-  @Column()
-  descripcion: string;
-
-  @Column()
-  detalleCompra: {
-    formatoCSV: string;
-    fechaCompra: string;
-    nroFactura: string;
-    codigoProducto: string;
-  };
-
-  @Column()
-  problematica: string;
-}
-```
 
 # Autorización y Autenticación
 
@@ -254,10 +204,13 @@ Vamos a implementar ambas en la aplicacion de la mano de ``JWT``,
 
 ## Al contar con autorizacion
 
-Primero recordemos como mencionamos anteriormente que para comunicarnos con la aplicación utilizaríamos la interfaz de apollo que nos crea no solo la interfaz gráfica, sino una pequeña documentación de la API.
+Primero recordemos como mencionamos anteriormente que para comunicarnos con la aplicación utilizaríamos la ``interfaz de apollo`` (plugin) que nos crea no solo la interfaz gráfica, sino una pequeña documentación de la API.
 
+Accedemos a ella luego de correr la aplicación como vimos antes:
 
-## Aqui puede visualizar todas las operaciones de  la app y cierta descripción de cada una.
+``http://localhost:3000/graphql``
+
+## Aqui puede visualizar todas las operaciones de la app y cierta descripción de cada una.
 
 dividido en 2 partes:
 
@@ -266,8 +219,6 @@ dividido en 2 partes:
 ``Mutation``: operaciones de escritura
 
 <img src="letra/doc-apollo.png" width="500" height="300">
-
-
 
 
 
