@@ -12,31 +12,31 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
 export class UsuariosResolver {
   constructor(private readonly servicioUsuarios: ServicioUsuarios) {}
 
-  @Query(() => [Usuario], { name: 'ListarUsuarios' })
+  @Query(() => [Usuario], { name: 'ListarUsuarios', description: 'Listar todos los usuarios'})
   async findAll(): Promise<Usuario[]> {
     return this.servicioUsuarios.findAll();
   }
 
-  @Query(() => Usuario, { name: 'BuscarUsuarioByID' })
+  @Query(() => Usuario, { name: 'BuscarUsuarioByID' , description: 'Buscar usuario por ID' })
   async findOne(@Args('id', { type: () => ID }) id: string)
   : Promise<Usuario> {
     return this.servicioUsuarios.findOneById(id);
   }
 
   // Actualizacion/modificacion de usuario
-  @Mutation(() => Usuario, { name: 'ActualizarUsuario'})
+  @Mutation(() => Usuario, { name: 'ActualizarUsuario', description: 'Actualizar roles, datos de un usuario'})
   async updateUser(@Args('actualizarUsuarioInput') actualizarUsuarioInput: ActualizarUsuarioInput, @CurrentUser([RolesValidos.admin]) usuario: Usuario) { 
     return this.servicioUsuarios.update(actualizarUsuarioInput.id, actualizarUsuarioInput, usuario);
   }
 
   // Eliminado permanente
-  @Mutation(() => Usuario, {name: "EliminarUsuario"})
+  @Mutation(() => Usuario, {name: "EliminarUsuario", description: "Eliminación permanente de un usuario"})
   removeUsuario(@Args('id', { type: () => ID }) id: string) {
     return this.servicioUsuarios.remove(id);
   }
 
   // Baja logica de usuario
-  @Mutation(() => Usuario, {name: 'BajaDeUsuario'})
+  @Mutation(() => Usuario, {name: 'BajaDeUsuario', description: "Baja logica de un usuario"})
   async BlockUser(
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @CurrentUser([RolesValidos.admin]) usuario : Usuario
