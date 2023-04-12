@@ -9,6 +9,7 @@ import { RolesValidos } from 'src/auth/enums/roles-validos.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
 
 @Resolver(() => Usuario)
+@UseGuards(JwtAuthGuard)
 export class UsuariosResolver {
   constructor(private readonly servicioUsuarios: ServicioUsuarios) {}
 

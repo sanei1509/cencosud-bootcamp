@@ -68,6 +68,9 @@ type Mutation {
   """Borrar un ticket de reclamo existente de DB"""
   EliminarReclamoFisicamente(id: ID!): Reclamo!
 
+  """Dar de baja un ticket de reclamo existente de DB"""
+  EliminarReclamoLogicamente(id: ID!): Reclamo!
+
   """Actualizar roles, datos de un usuario"""
   ActualizarUsuario(actualizarUsuarioInput: ActualizarUsuarioInput!): Usuario!
 

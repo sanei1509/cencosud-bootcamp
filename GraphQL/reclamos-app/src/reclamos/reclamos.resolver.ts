@@ -68,13 +68,22 @@ export class ReclamosResolver {
         return this.reclamosService.update(actualizarReclamoInput.id ,actualizarReclamoInput)
     }
 
-    // Borrar un reclamo por id
+    // Borrar un reclamo por id permanente
     @Mutation(() => Reclamo, {name: "EliminarReclamoFisicamente", description: "Borrar un ticket de reclamo existente de DB"})
     async deleteReclamo(
         @Args('id', {type: () => ID}) id: string
     ): Promise<Reclamo>{
         return this.reclamosService.delete(id);
     }
+
+    //Dar de baja a un reclamo por id
+    @Mutation(() => Reclamo, {name: "EliminarReclamoLogicamente", description: "Dar de baja un ticket de reclamo existente de DB"})
+    async deleteReclamoLogicamente(
+        @Args('id', {type: () => ID}) id: string
+    ): Promise<Reclamo>{
+        return this.reclamosService.deleteLogicamente(id);
+    }
+    
 
     // Traer reclamos por palabra clave (descripcion, problematica)
     @Query(() => [Reclamo], {name: "ReclamosPorPalabraClave", description: "Listar todos los tickets que tengan en su titulo o problema por ej = 'Falla' "})

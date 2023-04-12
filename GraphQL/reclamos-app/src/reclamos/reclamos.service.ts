@@ -132,7 +132,7 @@ export class ReclamosService {
         return reclamoActualizado;
     }
 
-    // Borrar un reclamo por id
+    // Borrar un reclamo por id permanente
     async delete(id: string): Promise<Reclamo> {
         // Busco el reclamo solicitado para eliminar
         const reclamoEliminado = await this.getReclamoById(id);
@@ -147,6 +147,23 @@ export class ReclamosService {
         // return {...reclamoEliminado, id};
         return reclamoEliminado; 
     }
+
+    // Borrar un reclamo por id Logicamente
+    async deleteLogicamente(id: string): Promise<Reclamo> {
+        // Busco el reclamo solicitado para eliminar
+        const reclamoEliminado = await this.getReclamoById(id);
+        let nroReclamo = reclamoEliminado.nroReclamo;
+        
+        // Elimino el reclamo
+        reclamoEliminado.activo = false;
+        console.log(await this.reclamosRepository.save(reclamoEliminado));
+
+        //Cargo nroReclamo y ID en el Reclamo eliminado
+        reclamoEliminado.nroReclamo = nroReclamo;
+        reclamoEliminado.id = id;
+        return {...reclamoEliminado, id};
+    }
+
 
 
     // Traer reclamos por palabra clave (Titulo, problema)
