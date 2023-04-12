@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reclamo } from 'src/reclamos/entity/reclamo.entity';
@@ -26,7 +26,7 @@ export class SeedService {
     async seed(): Promise<boolean> {
         //Verificamos que no estemos en produccion
         if (this.production){
-            throw new Error('No se puede ejecutar el seed en producción');
+            throw new UnauthorizedException('No se puede ejecutar el seed en producción');
         }
         // 1. Limpiar la base de datos para que no choque la carga
         // await this.limpiarBaseDeDatos();

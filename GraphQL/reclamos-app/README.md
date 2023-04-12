@@ -86,12 +86,25 @@ docker-compose up -d
 ````
 ``-d`` para que se ejecute desacoplada de la terminal
 
+
 * Levantar el servidor
 ``directorio``: parado en ``/reclamos-app``
 ````
 
 yarn start:dev
 ````
+
+* Abrir el navegador en ``http://localhost:3000/graphql``
+* Para ver la documentación de la API, ir a ``http://localhost:3000/graphql``
+
+* Ejecutar el ``SEED`` , carga de datos ficticios en la base de datos
+
+Para eso vas a tener que ejecutar el mutation que indico aqui debajo
+
+<img src="letra/CARGA-DATOS.png" width="50%"/>
+
+## image
+
 
 # INSTRUCCIONES (2) CON SERVICIO AWS (RDS)
 
@@ -120,6 +133,13 @@ yarn start:dev
 
 * Abrir el navegador en ``http://localhost:3000/graphql``
 * Para ver la documentación de la API, ir a ``http://localhost:3000/graphql``
+
+
+* Ejecutar el ``SEED`` , carga de datos ficticios en la base de datos
+
+Para eso vas a tener que ejecutar el mutation que indico aqui debajo
+
+<img src="letra/CARGA-DATOS.png" width="50%"/>
 
 
 ## Requerimientos
