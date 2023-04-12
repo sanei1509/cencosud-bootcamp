@@ -101,7 +101,7 @@ yarn start:dev
 
 Para eso vas a tener que ejecutar el mutation que indico aqui debajo
 
-<img src="letra/SEED.png" width="50%"/>
+<img src="letra/SEED.png" width="80%"/>
 
 ## image
 
@@ -139,7 +139,7 @@ yarn start:dev
 
 Para eso vas a tener que ejecutar el mutation que indico aqui debajo
 
-<img src="letra/SEED.png" width="50%"/>
+<img src="letra/SEED.png" width="80%"/>
 
 
 ## Requerimientos
