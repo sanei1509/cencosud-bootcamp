@@ -9,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   providers: [ReclamosResolver, ReclamosService],
   imports: [
     TypeOrmModule.forFeature([Reclamo])
-  ]
+  ],
+  // Quiero tener acceso a la entidad desde el seedResolver / seedService
+  exports: [ReclamosService, TypeOrmModule]
 })
 export class ReclamosModule {}

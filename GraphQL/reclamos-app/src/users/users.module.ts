@@ -10,6 +10,6 @@ import { Usuario } from './entities/user.entity';
     TypeOrmModule.forFeature([Usuario])
   ],
   //para poder utilizar el servicio en otros modulos [Auth Module]
-  exports: [ServicioUsuarios]
+  exports: [ServicioUsuarios, TypeOrmModule]
 })
 export class UsersModule {}

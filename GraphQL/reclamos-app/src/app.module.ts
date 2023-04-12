@@ -11,6 +11,7 @@ import { ReclamosModule } from './reclamos/reclamos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -50,7 +51,8 @@ import { AuthModule } from './auth/auth.module';
     // Modulos de la app
     ReclamosModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    SeedModule
   ],
   controllers: [],
   providers: [],

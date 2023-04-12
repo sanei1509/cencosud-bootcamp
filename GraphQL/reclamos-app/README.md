@@ -217,7 +217,13 @@ dividido en 2 partes:
 
 ``Query``: operaciones de lectura
 
+<img src="letra/doc-queries.png" width="500" height="300">
+
 ``Mutation``: operaciones de escritura
+
+<img src="letra/doc-mutation.png" width="500" height="300">
+
+Para entrar debemos ir a  "Schemas" aqui:
 
 <img src="letra/doc-apollo.png" width="500" height="300">
 
@@ -225,7 +231,11 @@ dividido en 2 partes:
 
 ## Para poder acceder a las operaciones de la API, necesitamos un token de autenticación.
 
-Como se muestra en la imagen siguiente:
+el token se obtiene como respuesta al loguearse o registrarse.
+
+<img src="letra/recupero-token.png" width="500" height="300">
+
+Lo incluimos en el header como se muestra en la imagen siguiente:
 
 <img src="letra/auth-img-instruction.png" width="700" height="500">
 

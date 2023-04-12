@@ -40,9 +40,15 @@ type Query {
   """Listar un ticket solicitado por app"""
   SolicitarReclamoID(id: ID!): Reclamo!
 
-  """Listar todos los tickets de reclamos por palabra clave ej = 'Falla' """
+  """
+  Listar todos los tickets que tengan en su titulo o problema por ej = 'Falla' 
+  """
   ReclamosPorPalabraClave(palabraClave: String!): [Reclamo!]!
+
+  """Listar todos los usuarios"""
   ListarUsuarios: [Usuario!]!
+
+  """Buscar usuario por ID"""
   BuscarUsuarioByID(id: ID!): Usuario!
 
   """Validar Token de Usuario, Devuelve datos del usuario"""
@@ -61,8 +67,14 @@ type Mutation {
 
   """Borrar un ticket de reclamo existente de DB"""
   EliminarReclamoFisicamente(id: ID!): Reclamo!
+
+  """Actualizar roles, datos de un usuario"""
   ActualizarUsuario(actualizarUsuarioInput: ActualizarUsuarioInput!): Usuario!
+
+  """Eliminación permanente de un usuario"""
   EliminarUsuario(id: ID!): Usuario!
+
+  """Baja logica de un usuario"""
   BajaDeUsuario(id: ID!): Usuario!
 
   """Registro de Usuario en la base de datos, Generar Auth Token"""
@@ -70,6 +82,9 @@ type Mutation {
 
   """Inicio de sesión de Usuario, Incluir Auth Token"""
   Login(loginUsuarioInput: LoginUsuarioInput!): AuthResponse!
+
+  """Construye datos base para poder probar la aplicación"""
+  cargaDeDatos: Boolean!
 }
 
 input CrearReclamoInput {
